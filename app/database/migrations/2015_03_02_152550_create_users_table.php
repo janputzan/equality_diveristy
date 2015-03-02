@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration {
 		    $table->string('last_name');
 		    $table->integer('manager_id')->unsigned()->nullable();
 
+		    $table->rememberToken();
 		    $table->timestamps();
 
 		    $table->index('email');
