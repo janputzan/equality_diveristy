@@ -78,4 +78,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return false;
 	}
 
+	public function isActive() {
+
+		if ($this->active) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 }

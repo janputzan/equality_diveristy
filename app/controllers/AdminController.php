@@ -1,10 +1,20 @@
 <?php
 
+use Validators\UserValidator;
+use Validators\DepartmentValidator;
+use Exceptions\ValidationFailedException;
+
 class AdminController extends BaseController {
 
+	public function __construct(UserValidator $userValidator, DepartmentValidator $departmentValidator)
+    {
+        $this->userValidator = $userValidator;
+        $this->departmentValidator = $departmentValidator;
+    }
+
 	
-	public function showDashboard()
-	{
+	public function showDashboard() {
+
 		return View::make('admin.dashboard');
 	}
 
@@ -30,12 +40,24 @@ class AdminController extends BaseController {
 	public function storeUsers() {
 
 		$data = Input::all();
+		$data['invitation_code'] = str_random(40);
 
 		$user = new User;
 		$user->first_name = $data['first_name'];
 		$user->last_name = $data['last_name'];
 		$user->email = $data['email'];
 		$user->manager_id = Department::find($data['department'])->manager()->id;
+		$user->invitation_code = $data['invitation_code'];
+		$user->active = false;
+
+		try {
+
+			$this->userValidator->validate($data);
+
+		} catch( ValidationFailedException $e) {
+
+			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
+		}
 
 		$user->save();
 
@@ -57,22 +79,38 @@ class AdminController extends BaseController {
 
 	public function storeDepartments() {
 
-		$data = Input::all();
+		$departmentData = Input::only('department_name', 'info');
 
-		$user = new User;
-		$user->first_name = $data['first_name'];
-		$user->last_name = $data['last_name'];
-		$user->email = $data['email'];
-		$user->manager_id = Auth::user()->id;
+		$userData = Input::only('first_name', 'last_name', 'email');
 
-		$user->save();
+		$userData['invitation_code'] = str_random(40);
 
-		$department = new Department;
-		$department->name = $data['department_name'];
-		$department->info = $data['info'];
-		$department->manager_id = $user->id;
+		try {
 
-		$department->save();
+			$this->userValidator->validate($userData);
+			$this->departmentValidator->validate($departmentData);
+			
+			$user = new User;
+			$user->first_name = $userData['first_name'];
+			$user->last_name = $userData['last_name'];
+			$user->email = $userData['email'];
+			$user->manager_id = Auth::user()->id;
+			$user->invitation_code = $userData['invitation_code'];
+			$user->active = false;
+
+			$user->save();
+
+			$department = new Department;
+			$department->name = $departmentData['department_name'];
+			$department->info = $departmentData['info'];
+			$department->manager_id = $user->id;
+
+			$department->save();
+
+		} catch( ValidationFailedException $e) {
+
+			return Redirect::back()->withInput()->withErrors($e->getValidationErrors());
+		}
 
 		return Redirect::route('admin.departments.index');
 

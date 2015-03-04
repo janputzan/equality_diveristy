@@ -8,6 +8,14 @@
 
 @section('content')
 
-	@include('partials._addUser')
+	@if (count($departments) > 0)
+
+		@include('partials._addUser')
+
+	@else
+
+		Please <a href=" {{ URL::route('admin.departments.add') }} ">add departments</a> first.
+
+	@endif
 
 @stop

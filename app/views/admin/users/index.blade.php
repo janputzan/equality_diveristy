@@ -25,6 +25,7 @@
 				<th data-field="email">Email</th>
 				<th data-field="last_name">Department</th>
 				<th data-field="last_name">Manager</th>
+				<th>Status</th>
 				<th>Actions</th>
 			</tr>
 	    </thead>
@@ -55,6 +56,7 @@
 							none
 						@endif
 					</td>
+					<td>{{ ($user->active) ? 'active' : 'invited' }}</td>
 					<td>
 						<a class="dropdown-button" href="#" data-activates="dropdown1">Actions</a>
 

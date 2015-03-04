@@ -8,7 +8,7 @@ class AuthController extends BaseController {
 		$email = Input::get('email');
 		$password = Input::get('password');
 
-		if (Auth::attempt(array('email' => $email, 'password' => $password)))
+		if (Auth::attempt(array('email' => $email, 'password' => $password, 'active' => true)))
 		{
 		    if (!Auth::user()->manager_id) {
 
@@ -17,6 +17,8 @@ class AuthController extends BaseController {
 
 		    return Redirect::route('dashboard');
 		}
+
+		return Redirect::back();
 	}
 
 	public function logout() {

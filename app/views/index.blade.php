@@ -1,5 +1,14 @@
 @extends('layouts.master')
 
+@section('header')
+
+	<div class="container">
+
+		<h5>Equality and Diversity</h5>
+
+	</div>
+@stop
+
 @section('content')
 
 		<div class="row">
