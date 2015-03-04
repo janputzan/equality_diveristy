@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@showHome']);
+
+Route::post('/', ['as' => 'login', 'uses' => 'AuthController@login']);
+
+Route::get('admin/dashboard', ['as' => 'admin.dashboard', 'uses' => 'AdminController@showDashboard']);
+
+Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'UserController@showDashboard']);
