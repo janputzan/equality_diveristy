@@ -8,8 +8,6 @@
 
 @section('content')
 
-	super admin user
-
-	
+	@include('partials._addUser')
 
 @stop

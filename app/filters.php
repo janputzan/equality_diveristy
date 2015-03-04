@@ -56,7 +56,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('admin', function() {
 
-	if (Auth::user()->manager_id) {
+	if (!Auth::user()->isAdmin()) {
 
 		if (Request::ajax()) {
 

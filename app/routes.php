@@ -26,6 +26,24 @@ Route::group(array('before' => 'auth'), function() {
 	Route::group(array('prefix' => 'admin', 'before' => 'admin'), function() {
 
 		Route::get('dashboard', array('as' => 'admin.dashboard', 'uses' => 'AdminController@showDashboard'));
+
+		Route::group(array('prefix' => 'users'), function() {
+
+			Route::get('/', array('as' => 'admin.users.index', 'uses' => 'AdminController@showUsers'));
+
+			Route::get('add', array('as' => 'admin.users.add', 'uses' => 'AdminController@addUsers'));
+			
+			Route::post('add', array('as' => 'admin.users.store', 'uses' => 'AdminController@storeUsers'));
+		});
+
+		Route::group(array('prefix' => 'departments'), function() {
+
+			Route::get('/', array('as' => 'admin.departments.index', 'uses' => 'AdminController@showDepartments'));
+
+			Route::get('/add', array('as' => 'admin.departments.add', 'uses' => 'AdminController@addDepartments'));
+
+			Route::post('/add', array('as' => 'admin.departments.store', 'uses' => 'AdminController@storeDepartments'));
+		});
 		
 	});
 });

@@ -16,7 +16,10 @@ class CreateDepartmentsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->integer('manager_id')->unsigned();
 			$table->text('info');
+
+			$table->index('manager_id');
 		});
 	}
 

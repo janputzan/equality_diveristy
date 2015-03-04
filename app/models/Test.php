@@ -2,7 +2,7 @@
 
 class Test extends Eloquent {
 
-	public $timestams = false;
+	public $timestamps = false;
 
 	public function user() {
 

@@ -2,7 +2,7 @@
 
 class Category extends Eloquent {
 
-	public $timestams = false;
+	public $timestamps = false;
 
 	public function questions() {
 
