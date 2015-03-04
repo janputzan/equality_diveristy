@@ -15,4 +15,34 @@ $(document).ready(function() {
     });
 
     $('select').material_select();
+
+    $('.ajaxForm').submit(function(e) {
+      e.preventDefault();
+      $('.errors').text('');
+      $.ajax({
+        url: $(this).action,
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(data) {
+          if (data['errors']) {
+
+            $.each( data['errors'], function( key, val ) {
+              $('input[name="' + key + '"]').addClass('invalid');
+              $('#' + key + '_message').text(val);
+            });
+          }
+          if (data['success']) {
+
+            toast(data['success'], 5000);
+            $('.errors').text('');
+            $('.ajaxForm').trigger('reset');
+          }
+        }
+      });
+    });
+
+    $('form').find('input').focus(function() {
+      $(this).removeClass('invalid');
+      $(this).next().text('');
+    });
 });

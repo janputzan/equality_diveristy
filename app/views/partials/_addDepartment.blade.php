@@ -1,5 +1,5 @@
 <div class="row">
-	{{ Form::open(array('route' => 'admin.departments.store')) }}
+	{{ Form::open(array('route' => 'admin.departments.store', 'class' => 'ajaxForm')) }}
 
 		<div class="row">
 
@@ -9,6 +9,7 @@
 				{{ Form::text('first_name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('first_name', '<span class="help-block">:message</span>') }}
+				<span id="first_name_message" class="errors"></span>
 
 			</div>
 
@@ -18,6 +19,7 @@
 				{{ Form::text('last_name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('last_name', '<span class="help-block">:message</span>') }}
+				<span id="last_name_message" class="errors"></span>
 
 			</div>
 
@@ -27,6 +29,7 @@
 				{{ Form::email('email', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('email', '<span class="help-block">:message</span>') }}
+				<span id="email_message" class="errors"></span>
 
 			</div>
 
@@ -37,9 +40,10 @@
 			<div class="input-field col s12 m4 l4">
 
 				{{ Form::label('Department Name') }}
-				{{ Form::text('department_name', null, array('class' => 'validate')) }}
+				{{ Form::text('name', null, array('class' => 'validate')) }}
 
-				{{ $errors->first('department_name', '<span class="help-block">:message</span>') }}
+				{{ $errors->first('name', '<span class="help-block">:message</span>') }}
+				<span id="name_message" class="errors"></span>
 
 			</div>
 
@@ -49,6 +53,7 @@
 				{{ Form::text('info', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('info', '<span class="help-block">:message</span>') }}
+				<span id="info_message" class="errors"></span>
 
 			</div>
 
