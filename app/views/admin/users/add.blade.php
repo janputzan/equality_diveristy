@@ -8,6 +8,9 @@
 
 @section('content')
 
+	<h5>Add Users</h5>
+	<div class="divider"></div>
+
 	@if (count($departments) > 0)
 
 		@include('partials._addUser')

@@ -8,6 +8,9 @@
 
 @section('content')
 
+	<h5>Add Departments</h5>
+	<div class="divider"></div>
+
 	@include('partials._addDepartment')
 
 @stop
