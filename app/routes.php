@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@showHome']);
+Route::get('/', array('as' => 'home', 'uses' => 'HomeController@showHome'));
 
-Route::post('/', ['as' => 'login', 'uses' => 'AuthController@login']);
+Route::post('/', array('as' => 'login', 'uses' => 'AuthController@login'));
 
-Route::get('admin/dashboard', ['as' => 'admin.dashboard', 'uses' => 'AdminController@showDashboard']);
 
-Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'UserController@showDashboard']);
+
+Route::group(array('before' => 'auth'), function() {
+
+	Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@logout'));
+
+	Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'UserController@showDashboard'));
+
+	Route::group(array('prefix' => 'admin', 'before' => 'admin'), function() {
+
+		Route::get('dashboard', array('as' => 'admin.dashboard', 'uses' => 'AdminController@showDashboard'));
+		
+	});
+});

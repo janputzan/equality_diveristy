@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::route('home');
 		}
 	}
 });
@@ -52,6 +52,21 @@ Route::filter('auth', function()
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
+});
+
+Route::filter('admin', function() {
+
+	if (Auth::user()->manager_id) {
+
+		if (Request::ajax()) {
+
+			return Response::make('Unauthorized', 401);
+
+		} else {
+
+			return Redirect::route('dashboard');
+		}
+	}
 });
 
 /*
