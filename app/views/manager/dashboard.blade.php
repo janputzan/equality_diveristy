@@ -8,7 +8,7 @@
 
 @section('content')
 
-	super admin user
+	manager
 
 	
 
