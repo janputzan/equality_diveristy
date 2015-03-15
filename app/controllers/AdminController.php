@@ -64,6 +64,19 @@ class AdminController extends BaseController {
 
 			$user->save();
 
+			$data = array(
+				'name'	=> $user->first_name,
+				'code'	=> $user->invitation_code,
+				'department' => Department::find($data['department'])->name
+			);
+
+			Mail::send('emails.users', $data, function($message) use ($user)
+			{
+			  $message->from('no-reply@equality.com', 'Site Admin');
+			  $message->to($user->email, $user->first_name)->subject('Welcome to Equality and Diversity');
+
+			});
+
 			return Response::json(array('success' => 'User created'));
 			
 		}
@@ -123,6 +136,19 @@ class AdminController extends BaseController {
 
 				return Response::json(array('errors' => $e->getValidationErrors()));
 			}
+
+			$data = array(
+				'name'	=> $user->first_name,
+				'code'	=> $user->invitation_code,
+				'department' => $department->name
+			);
+
+			Mail::send('emails.department', $data, function($message) use ($user)
+			{
+			  $message->from('no-reply@equality.com', 'Site Admin');
+			  $message->to($user->email, $user->first_name)->subject('Welcome to Equality and Diversity');
+
+			});
 
 			return Response::json(array('success' => 'Department created'));
 		}

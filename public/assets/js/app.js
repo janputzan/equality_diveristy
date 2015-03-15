@@ -45,4 +45,10 @@ $(document).ready(function() {
       $(this).removeClass('invalid');
       $(this).next().text('');
     });
+    
+    $('form').find('span').each(function() {
+        if ($(this).text() != '') {
+          $(this).siblings().filter('input').addClass('invalid');
+        }
+    });
 });

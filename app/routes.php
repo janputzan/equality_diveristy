@@ -15,6 +15,9 @@ Route::get('/', array('as' => 'home', 'uses' => 'HomeController@showHome'));
 
 Route::post('/', array('as' => 'login', 'uses' => 'AuthController@login'));
 
+Route::get('activate/{code?}', array('as' => 'activate', 'uses' => 'UserController@activate'));
+Route::post('activate/{code?}', array('as' => 'setPassword', 'uses' => 'UserController@storePassword'));
+
 
 
 Route::group(array('before' => 'auth'), function() {
@@ -22,6 +25,11 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@logout'));
 
 	Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'UserController@showDashboard'));
+
+	Route::group(array('prefix' => 'manager', 'before' => 'manager'), function() {
+
+		Route::get('dashboard', array('as' => 'manager.dashboard', 'uses' => 'ManagerController@showDashboard'));
+	});
 
 	Route::group(array('prefix' => 'admin', 'before' => 'admin'), function() {
 

@@ -3,6 +3,9 @@ header {
 }
 
 .errors {
-	font-size: x-small;
-	color: red;
+	position: absolute;
+	top: 45px;
+	font-size: small;
+	color: #ccc;
+	font-style: italic;
 }
