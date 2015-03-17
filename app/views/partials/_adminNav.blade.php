@@ -7,7 +7,7 @@
 				<li><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
 				<li><a href="{{ URL::route('admin.departments.index') }}">Departments</a></li>
 				<li><a href="#">Results</a></li>
-				<li><a href="#">Questions</a></li>
+				<li><a href="{{ URL::route('admin.questions.index') }}">Questions</a></li>
 				<li><a href="#">Settings</a></li>
 				<li><a href=" {{ URL::route('logout') }}">Log out</a></li>
 			</ul>
@@ -15,7 +15,7 @@
 				<li><a href="{{ URL::route('admin.users.index') }}">Users</a></li>
 				<li><a href="{{ URL::route('admin.departments.index') }}">Departments</a></li>
 				<li><a href="#">Results</a></li>
-				<li><a href="#">Questions</a></li>
+				<li><a href="{{ URL::route('admin.questions.index') }}">Questions</a></li>
 				<li><a href="#">Settings</a></li>
 				<li><a href=" {{ URL::route('logout') }}">Log out</a></li>
 			</ul>

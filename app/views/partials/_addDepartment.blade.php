@@ -3,7 +3,7 @@
 
 		<div class="row">
 
-			<div class="input-field col s12 m4 l4">
+			<div class="input-field col s12 m6 l6">
 
 				{{ Form::label('First Name') }}
 				{{ Form::text('first_name', null, array('class' => 'validate')) }}
@@ -13,7 +13,7 @@
 
 			</div>
 
-			<div class="input-field col s12 m4 l4">
+			<div class="input-field col s12 m6 l6">
 
 				{{ Form::label('Last Name') }}
 				{{ Form::text('last_name', null, array('class' => 'validate')) }}
@@ -23,7 +23,11 @@
 
 			</div>
 
-			<div class="input-field col s12 m4 l4">
+		</div>
+
+		<div class="row">
+
+			<div class="input-field col s12 m6 l6">
 
 				{{ Form::label('email') }}
 				{{ Form::email('email', null, array('class' => 'validate')) }}
@@ -32,12 +36,7 @@
 				<span id="email_message" class="errors"></span>
 
 			</div>
-
-		</div>
-
-		<div class="row">
-
-			<div class="input-field col s12 m4 l4">
+			<div class="input-field col s12 m6 l6">
 
 				{{ Form::label('Department Name') }}
 				{{ Form::text('name', null, array('class' => 'validate')) }}
@@ -47,10 +46,14 @@
 
 			</div>
 
-			<div class="input-field col s12 m8 l8">
+		</div>
+
+		<div class="row">
+
+			<div class="input-field col s12 m12 l12">
 
 				{{ Form::label('Info') }}
-				{{ Form::text('info', null, array('class' => 'validate')) }}
+				{{ Form::textarea('info', null, array('class' => 'validate materialize-textarea')) }}
 
 				{{ $errors->first('info', '<span class="help-block">:message</span>') }}
 				<span id="info_message" class="errors"></span>

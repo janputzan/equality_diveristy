@@ -2,14 +2,16 @@
 
 use Validators\UserValidator;
 use Validators\DepartmentValidator;
+use Validators\QuestionValidator;
 use Exceptions\ValidationFailedException;
 
 class AdminController extends BaseController {
 
-	public function __construct(UserValidator $userValidator, DepartmentValidator $departmentValidator)
+	public function __construct(UserValidator $userValidator, DepartmentValidator $departmentValidator, QuestionValidator $questionValidator)
     {
         $this->userValidator = $userValidator;
         $this->departmentValidator = $departmentValidator;
+        $this->questionValidator = $questionValidator;
     }
 
 	
@@ -132,7 +134,7 @@ class AdminController extends BaseController {
 
 				$department->save();
 
-			} catch( ValidationFailedException $e) {
+			} catch (ValidationFailedException $e) {
 
 				return Response::json(array('errors' => $e->getValidationErrors()));
 			}
@@ -155,7 +157,67 @@ class AdminController extends BaseController {
 
 		return Redirect::route('admin.departments.index');
 
+	}
 
+	public function showQuestions() {
+
+		$characteristics_id = isset($_GET['characteristic']) 
+							&& is_numeric($_GET['characteristic']) 
+							&& $_GET['characteristic']>0 
+							&& $_GET['characteristic']<=9 ? $_GET['characteristic'] : 1;
+
+		$questions = Characteristic::find($characteristics_id)->questions;
+		$characteristics = Characteristic::all();
+
+		return View::make('admin.questions.index')->with('questions', $questions)->with('characteristics', $characteristics);
+	}
+
+	public function addQuestions() {
+
+		$characteristics = array();
+		$mainAreas = array();
+
+		foreach (Characteristic::all() as $characteristic) {
+
+			$characteristics[$characteristic->id] = $characteristic->name;
+		}
+		foreach (MainArea::all() as $mainArea) {
+
+			$mainAreas[$mainArea->id] = $mainArea->name;
+		}
+
+		return View::make('admin.questions.add')->with('characteristics', $characteristics)->with('mainAreas', $mainAreas);
+	}
+
+	public function storeQuestions() {
+
+		if (Request::ajax()) {
+
+			$question_data = Input::only('characteristic', 'main_area', 'body');
+			
+			try {
+
+				$this->questionValidator->validateQuestion(array('body' => $question_data['body']));
+				$question = new Question;
+				$question->body = $question_data['body'];
+				$question->characteristic_id = $question_data['characteristic'];
+				$question->main_area_id = $question_data['main_area'];
+				$question->save();
+			
+			} catch (ValidationFailedException $e) {
+
+				return Response::json(array('errors' => $e->getValidationErrors()));
+			}
+			
+			return Response::json(array('success' => 'Question created',
+										'question_id' => $question->id,
+										'question_body' => $question->body,
+										'characteristic' => Characteristic::find($question->characteristic_id)->name,
+										'main_area' => MainArea::find($question->main_area_id)->name)); 
+
+		}
+
+		return Redirect::route('admin.questions.index');
 	}
 
 }

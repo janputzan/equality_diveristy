@@ -27,7 +27,7 @@ $(document).ready(function() {
           if (data['errors']) {
 
             $.each( data['errors'], function( key, val ) {
-              $('input[name="' + key + '"]').addClass('invalid');
+              $('[name="' + key + '"]').addClass('invalid');
               $('#' + key + '_message').text(val);
             });
           }
@@ -41,14 +41,16 @@ $(document).ready(function() {
       });
     });
 
-    $('form').find('input').focus(function() {
+    $('form').find('input, textarea').focus(function() {
       $(this).removeClass('invalid');
       $(this).next().text('');
     });
     
     $('form').find('span').each(function() {
         if ($(this).text() != '') {
-          $(this).siblings().filter('input').addClass('invalid');
+          $(this).siblings().filter('input, textarea').addClass('invalid');
         }
     });
+
+
 });

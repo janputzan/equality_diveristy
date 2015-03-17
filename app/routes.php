@@ -52,6 +52,16 @@ Route::group(array('before' => 'auth'), function() {
 
 			Route::post('/add', array('as' => 'admin.departments.store', 'uses' => 'AdminController@storeDepartments'));
 		});
+
+		Route::group(array('prefix' => 'questions'), function() {
+
+			Route::get('/', array('as' => 'admin.questions.index', 'uses' => 'AdminController@showQuestions'));
+
+			Route::get('/add', array('as' => 'admin.questions.add', 'uses' => 'AdminController@addQuestions'));
+
+			Route::post('/add', array('as' => 'admin.questions.store', 'uses' => 'AdminController@storeQuestions'));
+
+		});
 		
 	});
 });

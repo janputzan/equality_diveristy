@@ -9,4 +9,14 @@ class Answer extends Eloquent {
 		return $this->belongsTo('Question');
 	}
 
+	public function isRight() {
+
+		if ($this->id == $this->question->right_answer_id) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 }
