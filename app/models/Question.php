@@ -4,9 +4,14 @@ class Question extends Eloquent {
 
 	public $timestamps = false;
 
-	public function category() {
+	public function characteristic() {
 
-		return $this->belongsTo('Category');
+		return $this->belongsTo('Characteristic');
+	}
+
+	public function mainArea() {
+
+		return $this->belongsTo('MainArea');
 	}
 
 	public function tests() {

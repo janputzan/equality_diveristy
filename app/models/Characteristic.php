@@ -1,6 +1,6 @@
 <?php
 
-class Category extends Eloquent {
+class Characteristic extends Eloquent {
 
 	public $timestamps = false;
 
