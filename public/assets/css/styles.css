@@ -9,3 +9,7 @@ header {
 	color: #ccc;
 	font-style: italic;
 }
+
+.progress {
+	display: none;
+}

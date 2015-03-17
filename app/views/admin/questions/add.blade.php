@@ -8,7 +8,7 @@
 
 @section('content')
 
-	<h5>Add Questions</h5>
+	<h5>Add Question</h5>
 	<div class="divider"></div>
 
 	@include('partials._addQuestion')

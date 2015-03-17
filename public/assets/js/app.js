@@ -17,6 +17,8 @@ $(document).ready(function() {
     $('select').material_select();
 
     $('.ajaxForm').submit(function(e) {
+      $('.progress').show();
+      $(this).find('input[type=submit]').prop('disabled', true);
       e.preventDefault();
       $('.errors').text('');
       $.ajax({
@@ -24,6 +26,9 @@ $(document).ready(function() {
         type: 'POST',
         data: $(this).serialize(),
         success: function(data) {
+
+          $('.progress').hide();
+          $('.ajaxForm').find('input[type=submit]').prop('disabled', false);
           if (data['errors']) {
 
             $.each( data['errors'], function( key, val ) {

@@ -1,5 +1,12 @@
 <div class="row">
+
 	{{ Form::open(array('route' => 'admin.questions.store', 'class' => 'ajaxForm')) }}
+
+		<div class="progress">
+
+			<div class="indeterminate"></div>
+
+		</div>
 
 		<div class="row">
 
