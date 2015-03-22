@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'equality',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'dd7989390',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

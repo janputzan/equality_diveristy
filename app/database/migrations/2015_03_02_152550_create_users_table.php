@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration {
 		    $table->index('email');
 		    $table->index('manager_id');
 		    $table->index('invitation_code');
+		    $table->index('active');
 		});
 	}
 
