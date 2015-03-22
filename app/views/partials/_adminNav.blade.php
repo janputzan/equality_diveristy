@@ -1,6 +1,6 @@
 <nav>
 	<div class="nav-wrapper">
-		<div class="container">
+		<div class="container helper">
 			<a href="#!" class="brand-logo">Admin Panel</a>
 			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			<ul class="right hide-on-med-and-down">

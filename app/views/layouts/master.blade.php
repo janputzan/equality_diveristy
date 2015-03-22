@@ -16,7 +16,8 @@
 
 	</header>
 
-	<div class="container">
+	<div class="container main-height">
+
 
 		@include('partials._flash')
 
@@ -24,7 +25,7 @@
 	
 	</div>
 
-	<footer>
+	<footer class="container footer_bg">
 		
 		@yield('footer')
 

@@ -2,7 +2,7 @@
 
 @section('header')
 
-	<div class="container">
+	<div class="container helper">
 
 		<h5>Equality and Diversity</h5>
 

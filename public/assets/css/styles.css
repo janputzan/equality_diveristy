@@ -1,7 +1,15 @@
-header {
-	height: 100px;
+body {
+    min-height: 900px;
+    background-repeat:no-repeat;
+    background-size:cover;
 }
-
+header {
+    background-color: #3384BB;
+    color: #fff;
+    height: 100px;
+    margin: 0 0 20px;
+    padding: 10px;
+}
 .errors {
 	position: absolute;
 	top: 45px;
@@ -15,27 +23,62 @@ header {
 	position: absolute;
 }
 #right_answer_message {
-
 	top: 10px;
 	left: 190px;
 	color: red;
 }
-header {
-    background-color: #ccc;
-    font-size: 7em;
-    height: 100px;
-    margin: 0;
-    padding: 10px;
-    text-transform: uppercase;
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, ul.side-nav {
+    box-shadow: none;
 }
-header h5 {
-    color: #fff;
-    font-size: 55px;
-    margin: 23px 0 0 30px;
-    text-shadow: 1px 1px #333;
+nav{
+    background-color: #3384BB;
 }
-.alert {
-    color: red;
-    font-size: 19px;
-    padding: 10px;
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    line-height: 90px;
+}
+nav ul a {
+        padding: 0 10px;
+}
+.container h5 {
+    font-size: 25px;
+    margin: 20px 0 0 20px;
+}
+.container {
+    background-color: #fff;
+   
+}
+.row {
+    margin-top: 20px;
+}
+h5{
+    padding: 5px 0 10px 5px;
+}
+.helper {
+    background-color: #3384BB;
+}
+.main_helper {
+    padding: 20px;
+    width: 660px;
+}
+.mdi-action-done.right {
+    color: green;
+    font-size: 39px;
+}
+.footer_bg{
+    height: 318px;
+    width: 100%;
+    background: url("../../../assets/images/footer_bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background-repeat:no-repeat;
+}
+.main-height {
+    min-height: 300px;
+}
+.ajaxForm {
+    margin: 40px 0 0;
+}
+.btn{
+    background-color:#3384BB;
+}
+.btn:hover, .btn-large:hover {
+    background-color: #19679d;
 }
