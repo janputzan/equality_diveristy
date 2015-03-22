@@ -61,6 +61,8 @@ Route::group(array('before' => 'auth'), function() {
 
 			Route::post('/add', array('as' => 'admin.questions.store', 'uses' => 'AdminController@storeQuestions'));
 
+			Route::post('/add/answers', array('as' => 'admin.answers.store', 'uses' => 'AdminController@storeAnswers'));
+
 		});
 		
 	});

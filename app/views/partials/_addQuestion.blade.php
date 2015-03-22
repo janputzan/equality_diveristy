@@ -42,7 +42,7 @@
 
 		<div class="input-field col s6 m6 l6">
 
-			{{ Form::submit('Add Question', array('class' => 'btn')) }}
+			{{ Form::submit('Add Question', array('name' => 'add-question', 'class' => 'btn')) }}
 
 		</div>
 

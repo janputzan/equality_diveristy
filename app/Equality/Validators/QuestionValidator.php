@@ -11,10 +11,15 @@ class QuestionValidator extends BaseValidator
     	return $this->validate($data, $rules);
     }
 
-    public function validateAnswer($data) {
+    public function validateAnswers($data) {
 
         $rules = array(
-            'body' => 'required|min:10|max:500|unique:answers');
+            'answer_1' => 'required|min:10|max:500',
+            'answer_2' => 'required|min:10|max:500',
+            'answer_3' => 'required|min:10|max:500',
+            'answer_4' => 'required|min:10|max:500',
+            'right_answer' => 'required'
+            );
 
         return $this->validate($data, $rules);
     }

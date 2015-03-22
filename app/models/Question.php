@@ -24,5 +24,10 @@ class Question extends Eloquent {
 		return $this->hasMany('Answer');
 	}
 
+	public function rightAnswer() {
+
+		return $this->answers()->where('is_right', true)->first();
+	}
+
 	
 }

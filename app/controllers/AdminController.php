@@ -193,28 +193,70 @@ class AdminController extends BaseController {
 
 		if (Request::ajax()) {
 
-			$question_data = Input::only('characteristic', 'main_area', 'body');
-			
+
+
+				$question_data = Input::only('characteristic', 'main_area', 'body');
+				
+				try {
+
+					$this->questionValidator->validateQuestion(array('body' => $question_data['body']));
+					$question = new Question;
+					$question->body = $question_data['body'];
+					$question->characteristic_id = $question_data['characteristic'];
+					$question->main_area_id = $question_data['main_area'];
+					$question->save();
+				
+				} catch (ValidationFailedException $e) {
+
+					return Response::json(array('errors' => $e->getValidationErrors()));
+				}
+				
+				return Response::json(array('success' => 'Question created',
+											'question_id' => $question->id,
+											'question_body' => $question->body,
+											'characteristic' => Characteristic::find($question->characteristic_id)->name,
+											'main_area' => MainArea::find($question->main_area_id)->name));
+
+		}
+
+		return Redirect::route('admin.questions.index');
+	}
+
+	public function storeAnswers() {
+
+		if (Request::ajax()) {
+
+			$question_id = Input::get('_question_id');
+			$rightAnswer = Input::get('right_answer');
+			$i = 1;
+
 			try {
 
-				$this->questionValidator->validateQuestion(array('body' => $question_data['body']));
-				$question = new Question;
-				$question->body = $question_data['body'];
-				$question->characteristic_id = $question_data['characteristic'];
-				$question->main_area_id = $question_data['main_area'];
-				$question->save();
-			
+				$this->questionValidator->validateAnswers(Input::only('answer_1', 'answer_2', 'answer_3', 'answer_4', 'right_answer'));
+
 			} catch (ValidationFailedException $e) {
 
 				return Response::json(array('errors' => $e->getValidationErrors()));
 			}
-			
-			return Response::json(array('success' => 'Question created',
-										'question_id' => $question->id,
-										'question_body' => $question->body,
-										'characteristic' => Characteristic::find($question->characteristic_id)->name,
-										'main_area' => MainArea::find($question->main_area_id)->name)); 
 
+			foreach(Input::only('answer_1', 'answer_2', 'answer_3', 'answer_4') as $key=>$value) {
+
+				$answer = new Answer;
+				$answer->question_id = $question_id;
+				$answer->body = $value;
+
+				if ($i == intval($rightAnswer)) {
+
+					$answer->is_right = true;
+				} else {
+					$answer->is_right = false;
+				}
+
+				$answer->save();
+				$i++;
+			}
+
+			return Response::json(array('success' => 'Answers Added'));
 		}
 
 		return Redirect::route('admin.questions.index');

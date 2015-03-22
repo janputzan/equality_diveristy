@@ -12,4 +12,12 @@ header {
 
 .progress {
 	display: none;
+	position: absolute;
+}
+
+#right_answer_message {
+
+	top: 10px;
+	left: 190px;
+	color: red;
 }

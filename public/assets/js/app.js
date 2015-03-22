@@ -41,9 +41,61 @@ $(document).ready(function() {
             toast(data['success'], 5000);
             $('.errors').text('');
             $('.ajaxForm').trigger('reset');
+
+            if (data['question_id']) {
+
+              $('#question-body').find('span').text(data['question_body']);
+              $('#characteristic').find('span').text(data['characteristic']);
+              $('#main_area').find('span').text(data['main_area']);
+              $('#question_id').val(data['question_id']);
+
+              $('#add-answers').openModal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                opacity: .5, // Opacity of modal background
+                in_duration: 300, // Transition in duration
+                out_duration: 200 // Transition out duration
+              });
+
+              // this prevents reloading
+
+              window.onbeforeunload = function() {
+
+                      return "Please add all answers first. If you reload now, all answers will be lost.";
+                  }
+            }
           }
         }
       });
+    });
+
+    $('.ajaxForm-answers').submit(function(e) {
+      $('#add-answers .progress').show();
+      $(this).find('input[type=submit]').prop('disabled', true);
+      e.preventDefault();
+      $('.errors').text('');
+      $.ajax({
+        url: 'http://' + window.location.host + '/admin/questions/add/answers',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(data) {
+
+          $('#add-answers .progress').hide();
+          $('.ajaxForm-answers').find('input[type=submit]').prop('disabled', false);
+          if (data['errors']) {
+
+            $.each( data['errors'], function( key, val ) {
+              $('[name="' + key + '"]').addClass('invalid');
+              $('#' + key + '_message').text(val);
+            });
+          }
+          if (data['success']) {
+
+            toast(data['success'], 5000);
+            $('#add-answers').closeModal();
+            
+            window.onbeforeunload = null;
+        }
+      }});
     });
 
     $('form').find('input, textarea').focus(function() {
@@ -56,6 +108,5 @@ $(document).ready(function() {
           $(this).siblings().filter('input, textarea').addClass('invalid');
         }
     });
-
 
 });

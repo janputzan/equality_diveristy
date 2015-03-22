@@ -12,5 +12,6 @@
 	<div class="divider"></div>
 
 	@include('partials._addQuestion')
+	@include('partials._addAnswers')
 
 @stop

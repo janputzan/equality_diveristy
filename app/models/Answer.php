@@ -11,12 +11,7 @@ class Answer extends Eloquent {
 
 	public function isRight() {
 
-		if ($this->id == $this->question->right_answer_id) {
-
-			return true;
-		}
-
-		return false;
+		return $this->is_right;
 	}
 
 }
