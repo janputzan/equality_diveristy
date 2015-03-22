@@ -3,8 +3,7 @@
 @section('header')
 
 	<div class="container helper">
-
-		<h5>Equality and Diversity</h5>
+		<a href="#"><span><h5>Equality and Diversity</h5></span></a>
 
 	</div>
 @stop

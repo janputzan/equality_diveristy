@@ -39,9 +39,11 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 nav ul a {
         padding: 0 10px;
 }
-.container h5 {
-    font-size: 25px;
-    margin: 20px 0 0 20px;
+span h5 {
+    color: #fff;
+    font-size: 61px;
+    margin: 20px 0 0 10px;
+    text-shadow: 1px 1px #333;
 }
 .container {
     background-color: #fff;
