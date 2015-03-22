@@ -14,10 +14,28 @@ header {
 	display: none;
 	position: absolute;
 }
-
 #right_answer_message {
 
 	top: 10px;
 	left: 190px;
 	color: red;
+}
+header {
+    background-color: #ccc;
+    font-size: 7em;
+    height: 100px;
+    margin: 0;
+    padding: 10px;
+    text-transform: uppercase;
+}
+header h5 {
+    color: #fff;
+    font-size: 55px;
+    margin: 23px 0 0 30px;
+    text-shadow: 1px 1px #333;
+}
+.alert {
+    color: red;
+    font-size: 19px;
+    padding: 10px;
 }
