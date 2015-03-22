@@ -70,7 +70,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function isManager() {
 
-		if ($this->manager_id == 1) {
+		if (User::find($this->manager_id)->isAdmin()) {
 
 			return true;
 		}

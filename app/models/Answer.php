@@ -9,4 +9,9 @@ class Answer extends Eloquent {
 		return $this->belongsTo('Question');
 	}
 
+	public function isRight() {
+
+		return $this->is_right;
+	}
+
 }

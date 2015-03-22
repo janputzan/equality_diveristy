@@ -2,13 +2,13 @@
 
 @section('header')
 
-	@include('partials._userNav')
+	@include('partials._managerNav')
 
 @stop
 
 @section('content')
 
-	normal user
+	manager
 
 	
 

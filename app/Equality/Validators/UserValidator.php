@@ -9,5 +9,14 @@ class UserValidator extends BaseValidator
         'invitation_code' => 'required|unique:users'
     );
 
+    public function validatePassword($data) {
+
+    	$rules = array(
+    		'password' => 'required|min:6|max:30|confirmed',
+    		'password_confirmation' => 'required');
+
+    	return $this->validate($data, $rules);
+    }
+
     
 }

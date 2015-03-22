@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
 		    $table->string('first_name');
 		    $table->string('last_name');
 		    $table->integer('manager_id')->unsigned()->nullable();
-		    $table->string('invitation_code');
+		    $table->string('invitation_code')->nullable();
 		    $table->boolean('active')->default(false);
 
 		    $table->rememberToken();
@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration {
 		    $table->index('email');
 		    $table->index('manager_id');
 		    $table->index('invitation_code');
+		    $table->index('active');
 		});
 	}
 

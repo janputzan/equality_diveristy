@@ -3,6 +3,21 @@ header {
 }
 
 .errors {
-	font-size: x-small;
+	position: absolute;
+	top: 45px;
+	font-size: small;
+	color: #ccc;
+	font-style: italic;
+}
+
+.progress {
+	display: none;
+	position: absolute;
+}
+
+#right_answer_message {
+
+	top: 10px;
+	left: 190px;
 	color: red;
 }

@@ -68,6 +68,20 @@ Route::filter('admin', function() {
 		}
 	}
 });
+Route::filter('manager', function() {
+
+	if (!Auth::user()->isManager()) {
+
+		if (Request::ajax()) {
+
+			return Response::make('Unauthorized', 401);
+
+		} else {
+
+			return Redirect::route('dashboard');
+		}
+	}
+});
 
 /*
 |--------------------------------------------------------------------------
