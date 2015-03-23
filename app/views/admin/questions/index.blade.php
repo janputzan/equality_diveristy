@@ -47,7 +47,13 @@
 
 								<div class="col s11 m11 l11">{{ $question->body }}</div>
 
-								<div class="col s1 m1 l1 valign-wrapper"><i class="mdi-action-settings valign"></i></div>
+								<div class="col s1 m1 l1 valign-wrapper" title="Right click for options"><i class="mdi-action-settings valign"></i></div>
+
+								<ul class="actions">
+									<li>mark</li>
+									<li>edit</li>
+									<li>delete</li>
+								</ul>
 
 							</div>
 
