@@ -55,7 +55,7 @@
 
 						<div class="collapsible-body">
 
-							<ul class="collection">
+							<ul class="collection answers">
 
 								@foreach($question->answers as $answer)
 
