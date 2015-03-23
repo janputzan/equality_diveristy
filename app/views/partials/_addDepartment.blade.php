@@ -2,12 +2,6 @@
 
 	{{ Form::open(array('route' => 'admin.departments.store', 'class' => 'ajaxForm')) }}
 
-		<div class="progress">
-
-			<div class="indeterminate"></div>
-
-		</div>
-		
 		<div class="row">
 
 			<div class="input-field col s12 m6 l6">

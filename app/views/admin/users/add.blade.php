@@ -11,6 +11,12 @@
 	<h5>Add Users</h5>
 	<div class="divider"></div>
 
+	<div class="progress">
+
+		<div class="indeterminate"></div>
+
+	</div>
+
 	@if (count($departments) > 0)
 
 		@include('partials._addUser')

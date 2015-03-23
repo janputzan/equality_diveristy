@@ -20,7 +20,8 @@ header {
 
 .progress {
 	display: none;
-	position: absolute;
+	position: relative;
+	box-sizing: inherit;
 }
 #right_answer_message {
 	top: 10px;

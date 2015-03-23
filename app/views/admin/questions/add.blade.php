@@ -11,6 +11,12 @@
 	<h5>Add Question</h5>
 	<div class="divider"></div>
 
+	<div class="progress">
+
+		<div class="indeterminate"></div>
+
+	</div>
+
 	@include('partials._addQuestion')
 	@include('partials._addAnswers')
 
