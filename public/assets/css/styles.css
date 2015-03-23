@@ -94,7 +94,6 @@ h5{
 
 .question .collapsible-header{
     line-height: 1.5rem;
-    margin: 10px;
 }
 
 .question .collapsible-header:hover {
@@ -124,15 +123,24 @@ h5{
 
 .question {
     height: auto;
+    padding: 1px 6px !important;
+}
+.question:hover {
+    background-color: #3384BB;
 }
 
 .question-body {
     margin-top: 0;
-    padding-top: 10px;
+    margin-bottom: 0;
+    padding-top: 0px;
 }
 
 .collapsible {
     overflow: hidden;
+}
+
+.collapsible-body {
+    border-bottom: none;
 }
 
 .collection .collection-item.active {
@@ -142,5 +150,11 @@ h5{
 
 .collapsible-header {
     height: auto;
+    border-bottom: none;
 }
+
+.answers {
+    margin-bottom: 5px !important;
+}
+
 
