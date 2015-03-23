@@ -26,7 +26,7 @@
 
 				@foreach ($characteristics as $characteristic)
 
-					<li class="collection-item"><a href="?characteristic={{$characteristic->id}}">{{ $characteristic->name }}</a></li>
+					<li class="collection-item characteristic"><a href="?characteristic={{$characteristic->id}}">{{ $characteristic->name }}</a></li>
 
 				@endforeach
 			</ul>
@@ -39,7 +39,7 @@
 
 				@foreach ($questions as $question)
 
-					<li>
+					<li class="question">
 					
 						<div class="collapsible-header">{{ $question->body }}<i class="mdi-action-settings right"></i></div>
 
@@ -49,7 +49,7 @@
 
 								@foreach($question->answers as $answer)
 
-									<li class="collection-item">
+									<li class="collection-item answer">
 
 										{{$answer->body}}
 

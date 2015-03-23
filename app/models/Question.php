@@ -4,6 +4,8 @@ class Question extends Eloquent {
 
 	public $timestamps = false;
 
+	protected $fillable = array('id', 'characteristic_id', 'main_area_id', 'body');
+
 	public function characteristic() {
 
 		return $this->belongsTo('Characteristic');

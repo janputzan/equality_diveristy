@@ -85,3 +85,31 @@ h5{
 .btn:hover, .btn-large:hover {
     background-color: #19679d;
 }
+
+/* Questions Index */
+
+.question .collapsible-header{
+    font-weight: bold;
+}
+
+.question .collapsible-header:hover {
+
+    background-color: #3384BB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.question.active .collapsible-header {
+
+    background-color: #3384BB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.answer:hover {
+    background-color: #FFD8CC;
+}
+
+.characteristic:hover {
+    background-color: #eee;
+}
