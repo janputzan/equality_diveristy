@@ -109,4 +109,29 @@ $(document).ready(function() {
         }
     });
 
+ 
+    // context menu for questions
+
+    $('.question').find('i').parent().mousedown(function(e){ 
+        if( e.button == 2 ) { 
+          $(this).on('contextmenu', function(e) {
+              e.preventDefault();
+          }); 
+          $(this).next().show();
+          return false; 
+        } 
+        return true; 
+      });
+
+    // set clicking on body to hide actions
+    $('body').click(function() {
+      $('.actions').hide();
+    });
+    // this will be action for clicking on options
+    $('.actions li').click(function(e) {
+      e.preventDefault();
+      console.log($(this));
+    })
+
 });
+
