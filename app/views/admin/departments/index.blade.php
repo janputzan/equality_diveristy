@@ -16,6 +16,8 @@
 		
 	<div class="divider"></div>
 
+	@if ($departments->count() > 0)
+
 	<table class="striped bordered responsive-table">
 	    <thead>
 			<tr>
@@ -56,6 +58,12 @@
 	</table>
 
 	<div class="navigation"> {{ $departments->links() }} </div>
+
+	@else
+
+		<p>No Departments to display, please Add New.</p>
+
+	@endif
 
 
 	
