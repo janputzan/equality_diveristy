@@ -11,7 +11,7 @@
 
 @section('content')
 
-		<div class="row">
+		<div class="row activate">
 			
 			<div class="col s12 m8 l6 offset-m1 offset-l3">
 

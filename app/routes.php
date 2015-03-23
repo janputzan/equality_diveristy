@@ -29,6 +29,15 @@ Route::group(array('before' => 'auth'), function() {
 	Route::group(array('prefix' => 'manager', 'before' => 'manager'), function() {
 
 		Route::get('dashboard', array('as' => 'manager.dashboard', 'uses' => 'ManagerController@showDashboard'));
+
+		Route::group(array('prefix' => 'users'), function() {
+
+			Route::get('/', array('as' => 'manager.users.index', 'uses' => 'ManagerController@showUsers'));
+
+			Route::get('add', array('as' => 'manager.users.add', 'uses' => 'ManagerController@addUsers'));
+			
+			Route::post('add', array('as' => 'manager.users.store', 'uses' => 'ManagerController@storeUsers'));
+		});
 	});
 
 	Route::group(array('prefix' => 'admin', 'before' => 'admin'), function() {

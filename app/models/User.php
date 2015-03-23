@@ -58,6 +58,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return Department::where('manager_id', '=', $this->id)->first();
 	}
 
+	public function getStaff() {
+
+		return User::where('manager_id', '=', $this->id);
+	}
+
 	public function isAdmin() {
 
 		if (!$this->manager_id) {
