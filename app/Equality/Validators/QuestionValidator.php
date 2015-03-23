@@ -14,10 +14,10 @@ class QuestionValidator extends BaseValidator
     public function validateAnswers($data) {
 
         $rules = array(
-            'answer_1' => 'required|min:10|max:500',
-            'answer_2' => 'required|min:10|max:500',
-            'answer_3' => 'required|min:10|max:500',
-            'answer_4' => 'required|min:10|max:500',
+            'answer_1' => 'required|min:2|max:500',
+            'answer_2' => 'required|min:2|max:500',
+            'answer_3' => 'required|min:2|max:500',
+            'answer_4' => 'required|min:2|max:500',
             'right_answer' => 'required'
             );
 

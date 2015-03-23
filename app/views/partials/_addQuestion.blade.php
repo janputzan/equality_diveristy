@@ -26,7 +26,7 @@
 				{{ Form::textarea('body', null, array('class' => 'validate materialize-textarea')) }}
 
 				{{ $errors->first('body', '<span class="help-block">:message</span>') }}
-				<span id="body_message" class="errors"></span>
+				<p id="body_message" class="errors"></p>
 
 			</div>
 

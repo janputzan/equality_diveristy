@@ -6,7 +6,7 @@
 			{{ Form::label('password') }}
 			{{ Form::password('password', array('class' => 'validate')) }}
 			{{ $errors->first('password', '<span class="errors">:message</span>') }}
-				<span id="password_message" class="errors"></span>
+				<p id="password_message" class="errors"></p>
 
 		</div>
 
@@ -15,7 +15,7 @@
 			{{ Form::label('confirm_password') }}
 			{{ Form::password('password_confirmation', array('class' => 'validate')) }}
 			{{ $errors->first('password_confirmation', '<span class="errors">:message</span>') }}
-				<span id="password_confirmation_message" class="errors"></span>
+				<p id="password_confirmation_message" class="errors"></p>
 
 		</div>
 

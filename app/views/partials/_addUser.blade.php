@@ -10,7 +10,7 @@
 				{{ Form::text('first_name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('first_name', '<span class="help-block">:message</span>') }}
-				<span id="first_name_message" class="errors"></span>
+				<p id="first_name_message" class="errors"></p>
 
 			</div>
 
@@ -20,7 +20,7 @@
 				{{ Form::text('last_name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('last_name', '<span class="help-block">:message</span>') }}
-				<span id="last_name_message" class="errors"></span>
+				<p id="last_name_message" class="errors"></p>
 
 			</div>
 
@@ -40,7 +40,7 @@
 				{{ Form::email('email', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('email', '<span class="help-block">:message</span>') }}
-				<span id="email_message" class="errors"></span>
+				<p id="email_message" class="errors"></p>
 
 			</div>
 

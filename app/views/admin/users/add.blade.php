@@ -11,7 +11,7 @@
 	<h5>Add Users</h5>
 	<div class="divider"></div>
 
-	<div class="progress">
+	<div class="progress container">
 
 		<div class="indeterminate"></div>
 

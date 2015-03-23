@@ -27,7 +27,7 @@
 
 				{{ Form::label('answer_1', 'Answer 1') }}
 				{{ $errors->first('answer_1', '<span class="help-block">:message</span>') }}
-				<span id="answer_1_message" class="errors"></span>
+				<p id="answer_1_message" class="errors"></p>
 				{{ Form::textarea('answer_1', null, array('class' => 'validate materialize-textarea')) }}
 
 			</div>
@@ -46,7 +46,7 @@
 				{{ Form::label('answer_2', 'Answer 2') }}
 				{{ Form::textarea('answer_2', null, array('class' => 'validate materialize-textarea')) }}
 				{{ $errors->first('answer_2', '<span class="help-block">:message</span>') }}
-				<span id="answer_2_message" class="errors"></span>
+				<p id="answer_2_message" class="errors"></p>
 
 			</div>
 			<p>
@@ -64,7 +64,7 @@
 				{{ Form::label('answer_3', 'Answer 3') }}
 				{{ Form::textarea('answer_3', null, array('class' => 'validate materialize-textarea')) }}
 				{{ $errors->first('answer_3', '<span class="help-block">:message</span>') }}
-				<span id="answer_3_message" class="errors"></span>
+				<p id="answer_3_message" class="errors"></p>
 
 			</div>
 			<p>
@@ -82,7 +82,7 @@
 				{{ Form::label('answer_4', 'Answer 4') }}
 				{{ Form::textarea('answer_4', null, array('class' => 'validate materialize-textarea')) }}
 				{{ $errors->first('answer_4', '<span class="help-block">:message</span>') }}
-				<span id="answer_4_message" class="errors"></span>
+				<p id="answer_4_message" class="errors"></p>
 
 			</div>
 			<p>
@@ -100,7 +100,7 @@
 
 			{{ Form::submit('Add Answers', array('name' => 'add-answers', 'class' => 'btn')) }}
 
-			<span id="right_answer_message" class="errors"></span>
+			<p id="right_answer_message" class="errors"></p>
 
 		</div>
 

@@ -10,7 +10,7 @@
 				{{ Form::text('first_name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('first_name', '<span class="help-block">:message</span>') }}
-				<span id="first_name_message" class="errors"></span>
+				<p id="first_name_message" class="errors"></p>
 
 			</div>
 
@@ -20,7 +20,7 @@
 				{{ Form::text('last_name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('last_name', '<span class="help-block">:message</span>') }}
-				<span id="last_name_message" class="errors"></span>
+				<p id="last_name_message" class="errors"></p>
 
 			</div>
 
@@ -34,7 +34,7 @@
 				{{ Form::email('email', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('email', '<span class="help-block">:message</span>') }}
-				<span id="email_message" class="errors"></span>
+				<p id="email_message" class="errors"></p>
 
 			</div>
 			<div class="input-field col s12 m6 l6">
@@ -43,7 +43,7 @@
 				{{ Form::text('name', null, array('class' => 'validate')) }}
 
 				{{ $errors->first('name', '<span class="help-block">:message</span>') }}
-				<span id="name_message" class="errors"></span>
+				<p id="name_message" class="errors"></p>
 
 			</div>
 
@@ -57,7 +57,7 @@
 				{{ Form::textarea('info', null, array('class' => 'validate materialize-textarea')) }}
 
 				{{ $errors->first('info', '<span class="help-block">:message</span>') }}
-				<span id="info_message" class="errors"></span>
+				<p id="info_message" class="errors"></p>
 
 			</div>
 
