@@ -11,11 +11,12 @@ header {
     padding: 10px;
 }
 .errors {
-	position: absolute;
-	top: 35px;
-	font-size: small;
-	color: #ccc;
-	font-style: italic;
+    color: blue;
+    font-size: small;
+    font-style: italic;
+    opacity: 0.5;
+    position: absolute;
+    top: 35px;
 }
 
 .progress {
@@ -44,6 +45,7 @@ span h5 {
     color: #fff;
     font-size: 61px;
     margin: 20px 0 0 10px;
+    text-align: center;
     text-shadow: 1px 1px #333;
 }
 .container {
@@ -179,4 +181,11 @@ h5{
 .actions > li:hover {
 
     background-color: #eee;
+}
+th {
+    color: #3384bb;
+    font-size: 16px;
+    margin: 0;
+    padding: 5px;
+    text-transform: uppercase;
 }
