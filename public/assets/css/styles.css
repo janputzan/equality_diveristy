@@ -85,3 +85,62 @@ h5{
 .btn:hover, .btn-large:hover {
     background-color: #19679d;
 }
+
+/* Questions Index */
+
+.collection {
+    background-color: #fff;
+}
+
+.question .collapsible-header{
+    line-height: 1.5rem;
+    margin: 10px;
+}
+
+.question .collapsible-header:hover {
+
+    background-color: #3384BB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.question.active .collapsible-header {
+
+    background-color: #3384BB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.answer:hover {
+    background-color: #FFD8CC;
+}
+
+.characteristic:hover {
+    background-color: #eee;
+}
+.characteristic.active {
+    background-color: #eee !important;
+}
+
+.question {
+    height: auto;
+}
+
+.question-body {
+    margin-top: 0;
+    padding-top: 10px;
+}
+
+.collapsible {
+    overflow: hidden;
+}
+
+.collection .collection-item.active {
+    background-color: #3384BB;
+    color: #000;
+}
+
+.collapsible-header {
+    height: auto;
+}
+

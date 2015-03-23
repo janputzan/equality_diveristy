@@ -26,7 +26,7 @@
 
 				@foreach ($characteristics as $characteristic)
 
-					<li class="collection-item"><a href="?characteristic={{$characteristic->id}}">{{ $characteristic->name }}</a></li>
+					<li class="collection-item characteristic {{ (isset($_GET['characteristic']) && $_GET['characteristic']==$characteristic->id) ? 'active' : ''}}"><a href="?characteristic={{$characteristic->id}}">{{ $characteristic->name }}</a></li>
 
 				@endforeach
 			</ul>
@@ -35,13 +35,23 @@
 
 		<div class="col s10 m9 l9">
 
-			<ul class="collapsible" data-collapsible="accordion">
+			<ul class="collapsible border-bottom collection" data-collapsible="accordion">
 
 				@foreach ($questions as $question)
 
-					<li>
+					<li class="question collection-item">
 					
-						<div class="collapsible-header">{{ $question->body }}<i class="mdi-action-settings right"></i></div>
+						<div class="collapsible-header">
+
+							<div class="question-body row">
+
+								<div class="col s11 m11 l11">{{ $question->body }}</div>
+
+								<div class="col s1 m1 l1 valign-wrapper"><i class="mdi-action-settings valign"></i></div>
+
+							</div>
+
+						</div>
 
 						<div class="collapsible-body">
 
@@ -49,7 +59,7 @@
 
 								@foreach($question->answers as $answer)
 
-									<li class="collection-item">
+									<li class="collection-item answer">
 
 										{{$answer->body}}
 
