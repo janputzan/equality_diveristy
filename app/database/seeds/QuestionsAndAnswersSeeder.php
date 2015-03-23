@@ -26,11 +26,11 @@ class QuestionsAndAnswersSeeder extends Seeder {
                     'id' => $question_id,
                     'characteristic_id' => $characteristic->id,
                     'main_area_id' => $mainArea->id,
-                    'body' => 'From '.$characteristic->name.' and regarding '.$mainArea->name.'?'));
+                    'body' => 'What would you do to '.$mainArea->name.' in regards to '.$characteristic->name.'?'));
 
                     Answer::create(array(
                         'question_id' => $question_id,
-                        'body' => 'Answer number 1, that might, or might not, be obvious, neither apparent.',
+                        'body' => 'Answer number 1, that might, or might not be obvious, neither apparent.',
                         'is_right' => false));
 
                     Answer::create(array(

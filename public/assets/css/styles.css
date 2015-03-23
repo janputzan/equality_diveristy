@@ -88,8 +88,13 @@ h5{
 
 /* Questions Index */
 
+.collection {
+    background-color: #fff;
+}
+
 .question .collapsible-header{
-    font-weight: bold;
+    line-height: 1.5rem;
+    margin: 10px;
 }
 
 .question .collapsible-header:hover {
@@ -113,3 +118,29 @@ h5{
 .characteristic:hover {
     background-color: #eee;
 }
+.characteristic.active {
+    background-color: #eee !important;
+}
+
+.question {
+    height: auto;
+}
+
+.question-body {
+    margin-top: 0;
+    padding-top: 10px;
+}
+
+.collapsible {
+    overflow: hidden;
+}
+
+.collection .collection-item.active {
+    background-color: #3384BB;
+    color: #000;
+}
+
+.collapsible-header {
+    height: auto;
+}
+
