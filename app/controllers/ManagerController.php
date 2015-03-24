@@ -8,6 +8,7 @@ class ManagerController extends BaseController {
 
 	public function __construct(UserValidator $userValidator, DepartmentValidator $departmentValidator)
     {
+    	parent::__construct();
         $this->userValidator = $userValidator;
         $this->departmentValidator = $departmentValidator;
     }

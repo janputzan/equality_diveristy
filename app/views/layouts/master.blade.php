@@ -25,7 +25,7 @@
 	
 	</div>
 
-	<footer class="container footer_bg">
+	<footer class="container">
 		
 		@yield('footer')
 

@@ -1,12 +1,11 @@
 @if ( Session::has('message') )
-    <div class="alert alert-dismissable alert-success alert-top">
+    <div class="message">
         {{ Session::get('message') }}
     </div>
 @endif
 
 @if ( Session::has('errorMessage') )
-    <div class="alert alert-dismissable alert-warning alert-top">
-        <h4>Warning!</h4>
+    <div class="message error">
         {{ Session::get('errorMessage') }}
     </div>
 @endif

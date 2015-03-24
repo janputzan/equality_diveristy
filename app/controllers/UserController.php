@@ -7,6 +7,7 @@ class UserController extends BaseController {
 
 	public function __construct(UserValidator $userValidator)
     {
+        parent::__construct();
         $this->userValidator = $userValidator;
     }
 
@@ -25,7 +26,7 @@ class UserController extends BaseController {
 			return View::make('user.activate')->with('user', $user)->with('code', $code);
 		}
 
-		return Redirect::route('home')->with('errorMessage', 'This activation code has expired, contact the Administrator');
+		return Redirect::route('showLogin')->with('errorMessage', 'This activation code has expired, contact the Administrator');
 	}
 
 	public function storePassword() {
@@ -48,7 +49,7 @@ class UserController extends BaseController {
 			$user->invitation_code = null;
 			$user->save();
 
-			return Redirect::route('home')->with('message', 'You can now log in.');
+			return Redirect::route('showLogin')->with('message', 'You can now log in.');
 		}
 
 		return Redirect::back()->with('errorMessage', 'Something went wrong. Please contact the Administrator');

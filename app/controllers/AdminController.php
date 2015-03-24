@@ -9,6 +9,8 @@ class AdminController extends BaseController {
 
 	public function __construct(UserValidator $userValidator, DepartmentValidator $departmentValidator, QuestionValidator $questionValidator)
     {
+        parent::__construct();
+
         $this->userValidator = $userValidator;
         $this->departmentValidator = $departmentValidator;
         $this->questionValidator = $questionValidator;

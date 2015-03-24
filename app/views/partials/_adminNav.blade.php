@@ -1,4 +1,4 @@
-<nav>
+<nav class="admin">
 	<div class="nav-wrapper">
 		<div class="container helper">
 			<a href="#!" class="brand-logo">Admin Panel</a>

@@ -11,20 +11,35 @@
 |
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'HomeController@showHome'));
+Route::get('404', array('as' => 'show404', 'uses' => 'HomeController@show404'));
 
-Route::post('/', array('as' => 'login', 'uses' => 'AuthController@login'));
+Route::get('home', array('as' => 'home', 'uses' => 'HomeController@redirectHome'));
 
-Route::get('activate/{code?}', array('as' => 'activate', 'uses' => 'UserController@activate'));
-Route::post('activate/{code?}', array('as' => 'setPassword', 'uses' => 'UserController@storePassword'));
+Route::group(array('before' => 'guest'), function() {
 
+	Route::get('/', array('as' => 'showLogin', 'uses' => 'HomeController@showLogin'));
 
+	Route::post('/', array('as' => 'postLogin', 'uses' => 'AuthController@login'));
+	
+	Route::get('activate/{code?}', array('as' => 'activate', 'uses' => 'UserController@activate'));
+	
+	Route::post('activate/{code?}', array('as' => 'setPassword', 'uses' => 'UserController@storePassword'));
+});
 
 Route::group(array('before' => 'auth'), function() {
 
 	Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@logout'));
 
-	Route::get('dashboard', array('as' => 'dashboard', 'uses' => 'UserController@showDashboard'));
+	Route::get('dashboard', array('as' => 'user.dashboard', 'uses' => 'UserController@showDashboard'));
+
+	Route::group(array('prefix' => 'test'), function() {
+
+		Route::get('showStart', array('as' => 'test.showStart', 'uses' => 'TestController@showStart'));
+
+		Route::post('start', array('as' => 'test.startTest', 'uses' => 'TestController@startTest'));
+
+		Route::get('next', array('as' => 'test.nextQuestion', 'uses' => 'TestController@nextQuestion'));
+	});
 
 	Route::group(array('prefix' => 'manager', 'before' => 'manager'), function() {
 

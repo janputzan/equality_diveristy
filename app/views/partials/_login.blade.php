@@ -1,5 +1,5 @@
 <div class="row">
-	{{ Form::open(array('route' => 'login')) }}
+	{{ Form::open(array('route' => 'postLogin')) }}
 
 		<div class="input-field col s12 m12 l12">
 

@@ -3,13 +3,6 @@ body {
     background-repeat:no-repeat;
     background-size:cover;
 }
-header {
-    background-color: #3384BB;
-    color: #fff;
-    height: 100px;
-    margin: 0 0 20px;
-    padding: 10px;
-}
 .errors {
     color: blue;
     font-size: small;
@@ -32,8 +25,21 @@ header {
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, ul.side-nav {
     box-shadow: none;
 }
-nav{
+/* Default nav colour */
+nav {
+    height: 100px;
+    color: #fff;
     background-color: #3384BB;
+}
+/* Different colours for different users */
+nav.admin {
+    background-color: #1693A5;
+}
+nav.user {
+    background-color: #C44D58; /* this one is called Grandma's Pillow */
+}
+nav.manager {
+    background-color: #556270;
 }
 nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     line-height: 90px;
@@ -188,4 +194,56 @@ th {
     margin: 0;
     padding: 5px;
     text-transform: uppercase;
+}
+
+/* Helper methods */
+.small-text {
+    font-size: small;
+}
+
+/* Attempts counter */
+.attempts {
+    position: relative;
+    top: 25px;
+    right: -175px;
+}
+
+/* Test */
+#after-start, #test-finished {
+    display: none;
+}
+
+.start-test-container {
+    width: 300px;
+    margin: auto;
+    position: relative;
+}
+#start-test, #go-back {
+    width: 300px; 
+    top: 60px;
+}
+
+#answers-list > li {
+    opacity: 0;
+}
+
+.message {
+    display: none;
+}
+
+.question-container {
+    position: relative;
+    top: 10px;
+    max-width: 600px;
+    min-width: 400px;
+    margin: auto;
+}
+#test-question-body {
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: large;
+}
+#answers-list > li:hover, #answers-list > li.active {
+    background-color: rgba(225,245,196,0.5);
 }

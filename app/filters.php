@@ -64,7 +64,7 @@ Route::filter('admin', function() {
 
 		} else {
 
-			return Redirect::route('dashboard');
+			return Redirect::route('home');
 		}
 	}
 });
@@ -78,7 +78,7 @@ Route::filter('manager', function() {
 
 		} else {
 
-			return Redirect::route('dashboard');
+			return Redirect::route('home');
 		}
 	}
 });
@@ -96,7 +96,7 @@ Route::filter('manager', function() {
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::check()) return Redirect::route('home');
 });
 
 /*

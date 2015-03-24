@@ -17,40 +17,48 @@ class QuestionsAndAnswersSeeder extends Seeder {
         $mainAreas = MainArea::all();
 
         $question_id = 1;
+        $answer_id = 1;
 
-        foreach ($characteristics as $characteristic) {
-            
-            foreach ($mainAreas as $mainArea) {
+        for ($i = 0; $i < 3; $i++) {
 
-                $right_answer = rand(1,4);
+            foreach ($characteristics as $characteristic) {
+                
+                foreach ($mainAreas as $mainArea) {
 
-                Question::create(array(
-                    'id' => $question_id,
-                    'characteristic_id' => $characteristic->id,
-                    'main_area_id' => $mainArea->id,
-                    'body' => 'What would you do to '.$mainArea->name.' in regards to '.$characteristic->name.'?'));
+                    $right_answer = rand(1,4);
 
-                    Answer::create(array(
-                        'question_id' => $question_id,
-                        'body' => 'Answer number 1, that might, or might not be obvious, neither apparent.',
-                        'is_right' => $right_answer == 1 ? true : false));
+                    Question::create(array(
+                        'id'                => $question_id,
+                        'characteristic_id' => $characteristic->id,
+                        'main_area_id'      => $mainArea->id,
+                        'body'              => 'What would you do to '.$mainArea->name.' in regards to '.$characteristic->name.'? ver.'.$i));
 
-                    Answer::create(array(
-                        'question_id' => $question_id,
-                        'body' => 'Answer number 2, that is lacking substantial value.',
-                        'is_right' => $right_answer == 2 ? true : false));
+                        Answer::create(array(
+                            'id'            => $answer_id++,
+                            'question_id'   => $question_id,
+                            'body'          => 'Answer number 1, that might, or might not be obvious, neither apparent.',
+                            'is_right'      => $right_answer == 1 ? true : false));
 
-                    Answer::create(array(
-                        'question_id' => $question_id,
-                        'body' => 'Answer number 3, that is clearly wrong. Or is it?.',
-                        'is_right' => $right_answer == 3 ? true : false));
+                        Answer::create(array(
+                            'id'            => $answer_id++,
+                            'question_id'   => $question_id,
+                            'body'          => 'Answer number 2, that is lacking substantial value.',
+                            'is_right'      => $right_answer == 2 ? true : false));
 
-                    Answer::create(array(
-                        'question_id' => $question_id,
-                        'body' => 'Answer number 4, that you know you won\'t choose, but you can\'t stop thinking about.',
-                        'is_right' => $right_answer == 4 ? true : false));
+                        Answer::create(array(
+                            'id'            => $answer_id++,
+                            'question_id'   => $question_id,
+                            'body'          => 'Answer number 3, that is clearly wrong. Or is it?.',
+                            'is_right'      => $right_answer == 3 ? true : false));
 
-                $question_id++;
+                        Answer::create(array(
+                            'id'            => $answer_id++,
+                            'question_id'   => $question_id,
+                            'body'          => 'Answer number 4, that you know you won\'t choose, but you can\'t stop thinking about.',
+                            'is_right'      => $right_answer == 4 ? true : false));
+
+                    $question_id++;
+                }
             }
         }
     }

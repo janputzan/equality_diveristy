@@ -1,4 +1,4 @@
-<nav>
+<nav class="user">
 	<div class="nav-wrapper">
 		<div class="container">
 			<a href="#!" class="brand-logo">User Panel</a>

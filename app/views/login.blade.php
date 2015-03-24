@@ -2,10 +2,15 @@
 
 @section('header')
 
-	<div class="container helper">
-		<a href="#"><span><h5>Equality and Diversity</h5></span></a>
+	<nav>
 
-	</div>
+		<div class="container helper">
+		
+			<a href="#"><span><h5>Equality and Diversity</h5></span></a>
+
+		</div>
+
+	</nav>
 @stop
 
 @section('content')
