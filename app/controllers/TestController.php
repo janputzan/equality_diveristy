@@ -15,7 +15,9 @@ class TestController extends BaseController {
 			return Redirect::back()->with('errorMessage', 'You run out of available attempts. Please contact the administrator');
 		}
 
-		return View::make('test.start');
+		$characteristics = Characteristic::all();
+
+		return View::make('test.start')->with('characteristics', $characteristics);
 	}
 
 	public function startTest() {
@@ -29,7 +31,7 @@ class TestController extends BaseController {
 
 			if (!Session::has('user.test.questions')) {
 
-				$questions = TestAction::prepare(Auth::user());
+				$questions = TestAction::prepare();
 
 				foreach ($questions as $question) {
 
@@ -38,22 +40,26 @@ class TestController extends BaseController {
 				}
 			}
 
+			Session::put('user.test.id', TestAction::startTest());
 
 			return Response::json(array('status' => 1));
-			
 		}
 
 	}
 
 	public function nextQuestion() {
 
-		$count = Session::has('user.test.questions.count') ? Session::get('user.test.questions.count') : 0;
-
-		// dd(Session::get('user.test.questions.count'));
 
 		if (Request::ajax()) {
 
-			if (Session::has('user.test.questions') && $count < 27) {
+			if (Session::has('user.test.questions')) {
+
+				$count = 27 - count(Session::get('user.test.questions'));
+
+				if ($count) {
+
+					TestAction::processQuestion(Input::get('question_id'), Input::get('answer_id'));
+				}
 
 				$question = Question::with('answers')->find(Session::get('user.test.questions.'.$count));
 
@@ -71,16 +77,28 @@ class TestController extends BaseController {
 					'answers' 		=> $answers,
 					'count' 		=> $count + 1);
 
-				Session::put('user.test.questions.count', ++$count);
+				Session::forget('user.test.questions.'.$count);
+				
+				if (count(Session::get('user.test.questions')) == 0) {
+
+					Session::forget('user.test.questions');
+				}
 			
 			} else {
 
-				$response = array('status' => 0);
-				Session::forget('user.test.questions');
-				Session::forget('user.test.questions.count');
+				if (Session::has('user.test.results')) {
+
+					$response = array(
+						'status' => 2,
+						'results' => Session::get('user.test.results'));
+
+					Session::forget('user.test.results');
+
+				} else {
+
+					$response = array('status' => 0);
+				}
 			}
-
-
 
 			return Response::json($response);
 		}

@@ -32,6 +32,8 @@ class AuthController extends BaseController {
 
 		Auth::logout();
 
+		Session::flush();
+
 		return Redirect::route('showLogin')->with('message', 'You have logged out');
 	}
 

@@ -18,7 +18,7 @@ class Question extends Eloquent {
 
 	public function tests() {
 
-		return $this->belongsToMany('Test', 'test_questions');
+		return $this->belongsToMany('Test')->withPivot('answer_id', 'result')->withTimestamps();
 	}
 
 	public function answers() {

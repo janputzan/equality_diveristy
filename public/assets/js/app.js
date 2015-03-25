@@ -137,6 +137,9 @@ $(document).ready(function() {
     //start test
     $('#start-test').click(function(e) {
 
+      window.onbeforeunload = function() {
+        return "You might experience a glitch or two if you refresh. Proceed with caution.";
+      }
       e.preventDefault();
 
       $('#before-start').fadeOut(500, function() {
@@ -154,6 +157,7 @@ $(document).ready(function() {
           if (data['status']) {
 
             getNextQuestion();
+
 
             console.log('test started');
           
@@ -183,6 +187,9 @@ $(document).ready(function() {
 
 });
 
+
+var question_id, answer_id;
+
 function getNextQuestion() {
 
   $('.question-container').fadeOut(500, function() {
@@ -190,12 +197,26 @@ function getNextQuestion() {
     $('#get-next-question').attr('disabled', true);
     $('#get-prev-question').attr('disabled', true);
 
+
+console.log(question_id + ' ------ ' + answer_id);
+
     $.ajax({
       type: 'GET',
+      data: {'question_id': question_id,
+              'answer_id': answer_id},
       url: $('#get-next-question').data('action'),
       success: function(data) {
 
         if (data['status']) {
+
+          if (data['status'] == 2) {
+
+            testFinished(data['results']);
+
+            console.log(data['results']);
+
+            return false;
+          }
 
           // update question count
           $('#questions-count').text(data['count']);
@@ -215,10 +236,12 @@ function getNextQuestion() {
                 + '</li>');
           });
           // set on click action
-          $('#answers-list').find('li').click(function() {
+          $('#answers-list').find('li').click(function(e)  {
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
             $('#get-next-question').attr('disabled', false);
+            question_id = $('#test-question-body').data('question_id');
+            answer_id = $(this).data('answer_id');
           });
           // show question container
           showStaggeredList('#answers-list');
@@ -228,7 +251,7 @@ function getNextQuestion() {
 
         } else {
 
-          testFinished();
+          console.log('status: 0');
         }
       }
     });
@@ -238,12 +261,40 @@ function getNextQuestion() {
   return false;
 }
 
-function testFinished() {
+function testFinished(results) {
 
-  $('#after-start').slideUp(500, function() {
-    $('total-right').text();
-    $('#test-finished').fadeIn(500);
-  });
+  // var resultJSON = $.parseJSON(results);
+console.log(results.length);
+  var total_right = 0;
+  var result_list = '';
+  var _len = results.length;
+  for (var i = 0; i<_len; i++) {
+
+    var icon;
+    var question = results[i].question;
+    var answer = results[i].answer;
+    
+    if (results[i].result) {
+      icon = '<i class="mdi-action-done right"></i>';
+      total_right++;
+    } else {
+      icon = '<i class="mdi-alert-error right"></i>';
+    }
+    result_list +=  '<li class="collection-item"><div class="collapsible-header">' 
+                    + question 
+                    + icon 
+                    + '</div><div class="collapsible-body"><ul class="collection"><li class="collection-item">' 
+                    + answer 
+                    + '</li></ul></div></li>';
+  }
+
+  console.log(result_list);
+  $('#results-list').append(result_list);
+  showStaggeredList('#results-list');
+  $('#after-start').slideUp(500);
+  $('#total-right').text(total_right);
+  $('#test-finished').fadeIn(500);
+  
 }
 
 // function postAnswer() {

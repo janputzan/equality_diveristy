@@ -2,8 +2,6 @@
 
 class Test extends Eloquent {
 
-	public $timestamps = false;
-
 	public function user() {
 
 		return $this->belongsTo('User');
@@ -11,7 +9,7 @@ class Test extends Eloquent {
 
 	public function questions() {
 
-		return $this->belongsToMany('Question', 'test_questions');
+		return $this->belongsToMany('Question')->withPivot('answer_id', 'result')->withTimestamps();
 	}
 
 	

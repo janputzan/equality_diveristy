@@ -68,7 +68,40 @@
 
 		<div class="divider"></div>
 
-		<div class="start-test-container">
+		<div class="start-test-container row">
+
+			<!-- <ul class="collection" id="results-list"></ul> -->
+
+				<div class="col s2 m3 l3">
+
+					<ul class="collection with-header">
+
+						@foreach ($characteristics as $characteristic)
+
+							<li class="collection-item characteristic"><a href="#">{{ $characteristic->name }}</a></li>
+
+						@endforeach
+					</ul>
+
+				</div>
+
+				<div class="col s10 m9 l9">
+
+					<ul class="collapsible border-bottom collection" id="results-list" data-collapsible="accordion">
+
+							<!-- <li class="question collection-item">
+								<div class="collapsible-header">???</div>
+								<div class="collapsible-body">
+									<ul class="collection answers">
+										<li class="collection-item answer">???<i class="mdi-action-done right"></i></li>
+									</ul>
+								</div>
+							</li> -->
+					</ul>
+
+				</div>
+
+			</div>
 
 			<a class="waves-effect waves-light btn-large controls" id="go-back" href="{{URL::route('user.dashboard')}}">back to dashboard</a>
 

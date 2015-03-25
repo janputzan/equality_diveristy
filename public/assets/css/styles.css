@@ -214,7 +214,7 @@ th {
 }
 
 .start-test-container {
-    width: 300px;
+    /*width: 300px;*/
     margin: auto;
     position: relative;
 }

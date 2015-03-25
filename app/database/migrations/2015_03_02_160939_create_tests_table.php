@@ -16,10 +16,9 @@ class CreateTestsTable extends Migration {
 		{
 		    $table->increments('id');
 		    $table->integer('user_id');
-		    $table->date('date_taken');
+		    $table->timestamps();
 
 		    $table->index('user_id');
-		    $table->index('date_taken');
 		});
 	}
 

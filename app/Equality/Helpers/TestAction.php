@@ -4,13 +4,18 @@ use Characteristic;
 use MainArea;
 use Question;
 use Test;
+use Auth;
+use Session;
+use Answer;
 
 class TestAction {
 
 	/**
 	* @return array
 	*/
-	static public function prepare($user) {
+	static public function prepare() {
+
+		$user = Auth::user();
 
 		$testQuestions = array();
 
@@ -40,10 +45,51 @@ class TestAction {
 
 		foreach(Test::with('questions')->where('user_id', '=', $user->id)->get() as $test) {
 
-			array_push($questionsTaken, array($test->questions->id));
+			foreach($test->questions as $question) {
+
+				array_push($questionsTaken, array($question->id));
+			}
 		}
 
 		return $questionsTaken;
+	}
+
+	static public function startTest() {
+
+		$test = new Test;
+
+		$test->user_id = Auth::user()->id;
+
+		$test->save();
+
+		return $test->id;
+
+	}
+
+	static public function processQuestion($question_id, $answer_id) {
+
+
+		$test = Test::find(Session::get('user.test.id'));
+		$question = Question::find($question_id);
+		$answer = Answer::find($answer_id);
+
+		// dd(array('test' => $test, 'question' => $question, 'answer' => $answer));
+		if ($test && $question && $answer) {
+
+			$result = $answer->is_right;
+
+			$test->questions()->attach($question->id, array('answer_id' => $answer->id, 'result' => $result));
+
+			Session::push('user.test.results', array(
+				'category_id' 	=> $question->characteristic->id,
+				'question' 	=> $question->body,
+				'answer' 	=> $question->rightAnswer()->body,
+				'result' 	=> $result));
+
+			return true;
+		}
+
+		return false;
 	}
 
 }
