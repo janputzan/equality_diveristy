@@ -74,7 +74,7 @@ $(document).ready(function() {
       e.preventDefault();
       $('.errors').text('');
       $.ajax({
-        url: 'http://' + window.location.host + '/index.php/admin/questions/add/answers',
+        url: 'http://' + window.location.host + '/admin/questions/add/answers',
         type: 'POST',
         data: $(this).serialize(),
         success: function(data) {
