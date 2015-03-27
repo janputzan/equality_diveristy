@@ -7,6 +7,7 @@ use Test;
 use Auth;
 use Session;
 use Answer;
+use DB;
 
 class TestAction {
 
@@ -23,46 +24,60 @@ class TestAction {
 
 			foreach (MainArea::all() as $mainArea) {
 
-				$availableQuestions = Question::where('main_area_id', '=', $mainArea->id)
+				// $availableQuestions = Question::where('main_area_id', '=', $mainArea->id)
+				// 						->where('characteristic_id', '=', $characteristic->id)
+				// 						->whereNotIn('id',TestAction::getQuestionsTaken($user))
+				// 						->get();
+
+				$availableQuestions = TestAction::getQuestionsAvailable($user)
 										->where('characteristic_id', '=', $characteristic->id)
-										->whereNotIn('id',TestAction::getQuestionsTaken($user))
-										->get();
+										->where('main_area_id', $mainArea->id);
 
-				$_len = $availableQuestions->count() - 1;
+				// $_len = $availableQuestions->count() - 1;
 
-				$count = rand(0,$_len);
+				// $count = rand(0,$_len);
 				
-				array_push($testQuestions, array('id' => $availableQuestions[$count]->id));
+				array_push($testQuestions, $availableQuestions->get()->random(1));
 			}
 		}
+
+		$test = new Test;
+
+		$test->user_id = $user->id;
+		$test->save();
+
+		$ids = array();
+
+		foreach ($testQuestions as $key => $value) {
+			
+			array_push($ids, $value->id);
+			
+		}
+
+
+		// dd($ids);
+
+		$test->questions()->sync($ids);
 
 		return $testQuestions; 
 	}
 
 	static public function getQuestionsTaken($user) {
 
-		$questionsTaken = array();
+		$testIds = $user->tests->lists('id');
 
-		foreach(Test::with('questions')->where('user_id', '=', $user->id)->get() as $test) {
+		$ids = DB::table('question_test')->whereIn('test_id', $testIds)->lists('question_id');
 
-			foreach($test->questions as $question) {
-
-				array_push($questionsTaken, array($question->id));
-			}
-		}
-
-		return $questionsTaken;
+		return Question::whereIn('id', $ids);
 	}
 
-	static public function startTest() {
+	static public function getQuestionsAvailable($user) {
 
-		$test = new Test;
+		$testIds = $user->tests->lists('id');
 
-		$test->user_id = Auth::user()->id;
+		$ids = DB::table('question_test')->whereIn('test_id', $testIds)->lists('question_id');
 
-		$test->save();
-
-		return $test->id;
+		return Question::whereNotIn('id', $ids);
 
 	}
 

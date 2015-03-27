@@ -12,22 +12,26 @@ class TestController extends BaseController {
 
 		/* Change the value of this to limit test attempts*/
 
-		if (Auth::user()->tests->count() >= 5) {
+		if (Auth::user()->tests->count() >= 3) {
 
 			return Redirect::back()->with('errorMessage', 'You run out of available attempts. Please contact the administrator');
 		}
 
-		if (!Session::has('user.test.questions')) {
+		// if (!Session::has('user.test.questions')) {
 
 			$questions = TestAction::prepare();
 
-			foreach ($questions as $question) {
+			Session::put('user.test.questions', $questions);
 
-				Session::push('user.test.questions', $question['id']);
-			}
-			Session::put('user.test.id', TestAction::startTest());
-		}
+			// Session::put('user.test.id', TestAction::startTest());
+		// }
 
+		// $d = TestAction::prepare(Auth::user());
+
+		// $a = array_pop($d);
+			
+			var_dump(Session::get('user.test.questions'));
+die;
 		return View::make('test.start');
 	}
 
