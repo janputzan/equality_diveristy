@@ -10,56 +10,58 @@ class TestController extends BaseController {
 	}
 	public function showStart()	{
 
-		if (Auth::user()->tests->count() >= 3) {
+		/* Change the value of this to limit test attempts*/
+
+		if (Auth::user()->tests->count() >= 5) {
 
 			return Redirect::back()->with('errorMessage', 'You run out of available attempts. Please contact the administrator');
 		}
 
-		$characteristics = Characteristic::all();
+		if (!Session::has('user.test.questions')) {
 
-		return View::make('test.start')->with('characteristics', $characteristics);
-	}
+			$questions = TestAction::prepare();
 
-	public function startTest() {
+			foreach ($questions as $question) {
 
-		if (Request::ajax()) {
-
-			if (Auth::user()->tests->count() >= 3) {
-
-				return Response::json(array('status' => 0));
+				Session::push('user.test.questions', $question['id']);
 			}
-
-			if (!Session::has('user.test.questions')) {
-
-				$questions = TestAction::prepare();
-
-				foreach ($questions as $question) {
-
-
-					Session::push('user.test.questions', $question['id']);
-				}
-			}
-
 			Session::put('user.test.id', TestAction::startTest());
-
-			return Response::json(array('status' => 1));
 		}
 
+		return View::make('test.start');
 	}
+
+	// public function startTest() {
+
+	// 	if (Request::ajax()) {
+
+	// 		/* Change the value of this to limit test attempts*/
+
+	// 		if (Auth::user()->tests->count() >= 5) {
+
+	// 			return Response::json(array('status' => 0));
+	// 		}
+
+
+
+	// 		return Response::json(array('status' => 1));
+	// 	}
+
+	// }
 
 	public function nextQuestion() {
 
-
+		// $hasBeenAnswered = false;
 		if (Request::ajax()) {
 
-			if (Session::has('user.test.questions')) {
+			// if (Session::has('user.test.questions')) {
 
 				$count = 27 - count(Session::get('user.test.questions'));
 
-				if ($count) {
+				// if ($count != 0) {
 
-					TestAction::processQuestion(Input::get('question_id'), Input::get('answer_id'));
-				}
+				// 	$hasBeenAnswered = TestAction::processQuestion(Input::get('question_id'), Input::get('answer_id'));
+				// }
 
 				$question = Question::with('answers')->find(Session::get('user.test.questions.'.$count));
 
@@ -77,28 +79,33 @@ class TestController extends BaseController {
 					'answers' 		=> $answers,
 					'count' 		=> $count + 1);
 
-				Session::forget('user.test.questions.'.$count);
+				// if ($hasBeenAnswered) {
+
+					Session::forget('user.test.questions.'.$count);
+
+					// $response['count'] += 1; 
+				// }
 				
 				if (count(Session::get('user.test.questions')) == 0) {
 
 					Session::forget('user.test.questions');
 				}
 			
-			} else {
+			// } else {
 
-				if (Session::has('user.test.results')) {
+			// 	if (Session::has('user.test.results')) {
 
-					$response = array(
-						'status' => 2,
-						'results' => Session::get('user.test.results'));
+			// 		$response = array(
+			// 			'status' => 2,
+			// 			'results' => Session::get('user.test.results'));
 
-					Session::forget('user.test.results');
+			// 		Session::forget('user.test.results');
 
-				} else {
+			// 	} else {
 
-					$response = array('status' => 0);
-				}
-			}
+			// 		$response = array('status' => 0);
+			// 	}
+			// }
 
 			return Response::json($response);
 		}
@@ -115,6 +122,22 @@ class TestController extends BaseController {
 	public function saveProgress() {
 
 		
+	}
+
+	public function processAnswer() {
+
+		if (Request::ajax()) {
+
+			if (TestAction::processQuestion(Input::get('question_id'), Input::get('answer_id'))) {
+
+				return Response::json(array('status' => 1));
+			}
+
+			return Response::json(array('status' => 0));
+
+		}
+
+		return Redirect::route('home');
 	}
 
 }

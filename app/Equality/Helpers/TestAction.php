@@ -28,9 +28,9 @@ class TestAction {
 										->whereNotIn('id',TestAction::getQuestionsTaken($user))
 										->get();
 
-				$_len = $availableQuestions->count();
+				$_len = $availableQuestions->count() - 1;
 
-				$count = rand(0,$_len-1);
+				$count = rand(0,$_len);
 				
 				array_push($testQuestions, array('id' => $availableQuestions[$count]->id));
 			}

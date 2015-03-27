@@ -36,7 +36,7 @@ Route::group(array('before' => 'auth'), function() {
 
 		Route::get('showStart', array('as' => 'test.showStart', 'uses' => 'TestController@showStart'));
 
-		Route::post('start', array('as' => 'test.startTest', 'uses' => 'TestController@startTest'));
+		Route::post('showStart', array('as' => 'test.startTest', 'uses' => 'TestController@startTest'));
 
 		Route::get('next', array('as' => 'test.nextQuestion', 'uses' => 'TestController@nextQuestion'));
 	});

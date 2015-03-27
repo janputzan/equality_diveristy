@@ -37,5 +37,7 @@
 
 	{{ HTML::script('assets/js/app.js') }}
 
+	@yield('scripts')
+
 </body>
 </html>
