@@ -5,110 +5,110 @@ $(document).ready(function() {
 	// Dropdown
 
 	$('.dropdown-button').dropdown({
-			inDuration: 300,
-			outDuration: 225,
-			constrain_width: false, // Does not change width of dropdown to that of the activator
-			hover: false, // Activate on click
-			alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
-			gutter: 0, // Spacing from edge
-			belowOrigin: false // Displays dropdown below the button
-		});
 
-		$('select').material_select();
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: false, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on click
+      alignment: 'left', // Aligns dropdown to left or right edge (works with constrain_width)
+      gutter: 0, // Spacing from edge
+      belowOrigin: false // Displays dropdown below the button
+    });
 
-		$('.ajaxForm').submit(function(e) {
-			$('.progress').show();
-			$(this).find('input[type=submit]').prop('disabled', true);
-			e.preventDefault();
-			$('.errors').text('');
-			$.ajax({
-				url: $(this).action,
-				type: 'POST',
-				data: $(this).serialize(),
-				success: function(data) {
+    $('select').material_select();
 
-					$('.progress').hide();
-					$('.ajaxForm').find('input[type=submit]').prop('disabled', false);
-					if (data['errors']) {
+    $('.ajaxForm').submit(function(e) {
+      $('.progress').show();
+      $(this).find('input[type=submit]').prop('disabled', true);
+      e.preventDefault();
+      $('.errors').text('');
+      $.ajax({
+        url: $(this).action,
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(data) {
 
-						$.each( data['errors'], function( key, val ) {
-							$('[name="' + key + '"]').addClass('invalid');
-							$('#' + key + '_message').text(val);
-						});
-					}
-					if (data['success']) {
+          $('.progress').hide();
+          $('.ajaxForm').find('input[type=submit]').prop('disabled', false);
+          if (data['errors']) {
 
-						toast(data['success'], 5000);
-						$('.errors').text('');
-						$('.ajaxForm').trigger('reset');
+            $.each( data['errors'], function( key, val ) {
+              $('[name="' + key + '"]').addClass('invalid');
+              $('#' + key + '_message').text(val);
+            });
+          }
+          if (data['success']) {
 
-						if (data['question_id']) {
+            toast(data['success'], 5000);
+            $('.errors').text('');
+            $('.ajaxForm').trigger('reset');
 
-							$('#question-body').find('span').text(data['question_body']);
-							$('#characteristic').find('span').text(data['characteristic']);
-							$('#main_area').find('span').text(data['main_area']);
-							$('#question_id').val(data['question_id']);
+            if (data['question_id']) {
 
-							$('#add-answers').openModal({
-								dismissible: false, // Modal can be dismissed by clicking outside of the modal
-								opacity: .5, // Opacity of modal background
-								in_duration: 300, // Transition in duration
-								out_duration: 200 // Transition out duration
-							});
+              $('#question-body').find('span').text(data['question_body']);
+              $('#characteristic').find('span').text(data['characteristic']);
+              $('#main_area').find('span').text(data['main_area']);
+              $('#question_id').val(data['question_id']);
 
-							// this prevents reloading
+              $('#add-answers').openModal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                opacity: .5, // Opacity of modal background
+                in_duration: 300, // Transition in duration
+                out_duration: 200 // Transition out duration
+              });
 
-							window.onbeforeunload = function() {
+              // this prevents reloading
 
-											return "Please add all answers first. If you reload now, all answers will be lost.";
-									}
-						}
-					}
-				}
-			});
-		});
+              window.onbeforeunload = function() {
 
-		$('.ajaxForm-answers').submit(function(e) {
-			$('#add-answers .progress').show();
-			$(this).find('input[type=submit]').prop('disabled', true);
-			e.preventDefault();
-			$('.errors').text('');
-			$.ajax({
-				url: 'http://' + window.location.host + '/admin/questions/add/answers',
-				type: 'POST',
-				data: $(this).serialize(),
-				success: function(data) {
+                      return "Please add all answers first. If you reload now, all answers will be lost.";
+                  }
+            }
+          }
+        }
+      });
+    });
 
-					$('#add-answers .progress').hide();
-					$('.ajaxForm-answers').find('input[type=submit]').prop('disabled', false);
-					if (data['errors']) {
+    $('.ajaxForm-answers').submit(function(e) {
+      $('#add-answers .progress').show();
+      $(this).find('input[type=submit]').prop('disabled', true);
+      e.preventDefault();
+      $('.errors').text('');
+      $.ajax({
+        url: 'http://' + window.location.host + '/admin/questions/add/answers',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(data) {
 
-						$.each( data['errors'], function( key, val ) {
-							$('[name="' + key + '"]').addClass('invalid');
-							$('#' + key + '_message').text(val);
-						});
-					}
-					if (data['success']) {
+          $('#add-answers .progress').hide();
+          $('.ajaxForm-answers').find('input[type=submit]').prop('disabled', false);
+          if (data['errors']) {
 
-						toast(data['success'], 5000);
-						$('#add-answers').closeModal();
-						
-						window.onbeforeunload = null;
-				}
-			}});
-		});
+            $.each( data['errors'], function( key, val ) {
+              $('[name="' + key + '"]').addClass('invalid');
+              $('#' + key + '_message').text(val);
+            });
+          }
+          if (data['success']) {
 
-		$('form').find('input, textarea').focus(function() {
-			$(this).removeClass('invalid');
-			$(this).next().text('');
-		});
-		
-		$('form').find('span').each(function() {
-				if ($(this).text() != '') {
-					$(this).siblings().filter('input, textarea').addClass('invalid');
-				}
-		});
+            toast(data['success'], 5000);
+            $('#add-answers').closeModal();
+            
+            window.onbeforeunload = null;
+        }
+      }});
+    });
 
+    $('form').find('input, textarea').focus(function() {
+      $(this).removeClass('invalid');
+      $(this).next().text('');
+    });
+    
+    $('form').find('span').each(function() {
+        if ($(this).text() != '') {
+          $(this).siblings().filter('input, textarea').addClass('invalid');
+        }
+    });
  
 		// context menu for questions
 
