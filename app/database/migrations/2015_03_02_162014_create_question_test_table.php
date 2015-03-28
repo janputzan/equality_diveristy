@@ -18,11 +18,12 @@ class CreateQuestionTestTable extends Migration {
 			$table->integer('test_id')->unsigned();
 			$table->integer('question_id')->unsigned();
 			$table->integer('answer_id')->unsigned()->nullable();
-			$table->boolean('result');
+			$table->boolean('result')->nullable();
 			$table->timestamps();
 
 			$table->index('test_id');
 			$table->index('question_id');
+			$table->index('answer_id');
 			$table->index('result');
 		});
 	}

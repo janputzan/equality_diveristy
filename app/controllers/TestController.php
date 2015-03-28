@@ -12,104 +12,76 @@ class TestController extends BaseController {
 
 		/* Change the value of this to limit test attempts*/
 
-		if (Auth::user()->tests->count() >= 3) {
+		$test = TestAction::getUnfinished(Auth::user());
 
-			return Redirect::back()->with('errorMessage', 'You run out of available attempts. Please contact the administrator');
+
+		if ($test) {
+
+			$question = TestAction::getFirstQuestion($test);
+
+		} else {
+
+			if (Auth::user()->tests->count() >= 3) {
+
+				return Redirect::back()->with('errorMessage', 'You run out of available attempts. Please contact the administrator');
+			}
+
+			$response = TestAction::prepare(Auth::user());
+
+			$question = $response['question'];
+
+			$test = $response['test'];
+
+			if (!$question) {
+
+				return Redirect::back()->with('errorMessage', 'No more questions available. Please contact the administrator');
+			}
 		}
 
-		// if (!Session::has('user.test.questions')) {
+		$count = 28 - TestAction::countLeftQuestions($test);
 
-			$questions = TestAction::prepare();
+		JavaScript::put(array('test_id' => $test->id));
 
-			Session::put('user.test.questions', $questions);
-
-			// Session::put('user.test.id', TestAction::startTest());
-		// }
-
-		// $d = TestAction::prepare(Auth::user());
-
-		// $a = array_pop($d);
-			
-			var_dump(Session::get('user.test.questions'));
-die;
-		return View::make('test.start');
+		return View::make('test.start')->with('question', $question)->with('count', $count);
 	}
-
-	// public function startTest() {
-
-	// 	if (Request::ajax()) {
-
-	// 		/* Change the value of this to limit test attempts*/
-
-	// 		if (Auth::user()->tests->count() >= 5) {
-
-	// 			return Response::json(array('status' => 0));
-	// 		}
-
-
-
-	// 		return Response::json(array('status' => 1));
-	// 	}
-
-	// }
 
 	public function nextQuestion() {
 
-		// $hasBeenAnswered = false;
 		if (Request::ajax()) {
 
-			// if (Session::has('user.test.questions')) {
+			$data = Input::all();
 
-				$count = 27 - count(Session::get('user.test.questions'));
+			$test = Test::find($data['test_id']);
 
-				// if ($count != 0) {
+			TestAction::processQuestion($test, $data['question_id'], $data['answer_id']);
 
-				// 	$hasBeenAnswered = TestAction::processQuestion(Input::get('question_id'), Input::get('answer_id'));
-				// }
+			$question = TestAction::getFirstQuestion($test);
 
-				$question = Question::with('answers')->find(Session::get('user.test.questions.'.$count));
+			if ($question) {
+
+				$count = 28 - TestAction::countLeftQuestions($test);
 
 				$answers = array();
 
-				foreach($question->answers as $answer) {
+				foreach ($question->answers as $answer) {
 
-					array_push($answers, array('id' => $answer->id, 'body' => $answer->body));
+					array_push($answers, array('answer_id' => $answer->id,
+												'answer_body' => $answer->body));
 				}
 
-				$response = array(
-					'status' 		=> 1,
-					'question_id' 	=> $question->id,
-					'question_body' => $question->body,
-					'answers' 		=> $answers,
-					'count' 		=> $count + 1);
-
-				// if ($hasBeenAnswered) {
-
-					Session::forget('user.test.questions.'.$count);
-
-					// $response['count'] += 1; 
-				// }
+				$response = array('question_id' => $question->id,
+									'question_body' => $question->body,
+									'answers' => $answers,
+									'count' => $count,
+									'category' => $question->characteristic->name);
 				
-				if (count(Session::get('user.test.questions')) == 0) {
+			} else {
 
-					Session::forget('user.test.questions');
-				}
-			
-			// } else {
+				$result = TestAction::getResult($test);
 
-			// 	if (Session::has('user.test.results')) {
+				$response = array('finished' => 'true', 'result' => $result);
+			}
 
-			// 		$response = array(
-			// 			'status' => 2,
-			// 			'results' => Session::get('user.test.results'));
-
-			// 		Session::forget('user.test.results');
-
-			// 	} else {
-
-			// 		$response = array('status' => 0);
-			// 	}
-			// }
 
 			return Response::json($response);
 		}
@@ -128,20 +100,5 @@ die;
 		
 	}
 
-	public function processAnswer() {
-
-		if (Request::ajax()) {
-
-			if (TestAction::processQuestion(Input::get('question_id'), Input::get('answer_id'))) {
-
-				return Response::json(array('status' => 1));
-			}
-
-			return Response::json(array('status' => 0));
-
-		}
-
-		return Redirect::route('home');
-	}
 
 }

@@ -74,7 +74,7 @@ $(document).ready(function() {
 			e.preventDefault();
 			$('.errors').text('');
 			$.ajax({
-				url: 'http://' + window.location.host + '/index.php/admin/questions/add/answers',
+				url: 'http://' + window.location.host + '/admin/questions/add/answers',
 				type: 'POST',
 				data: $(this).serialize(),
 				success: function(data) {
@@ -133,33 +133,6 @@ $(document).ready(function() {
 			console.log($(this));
 		});
 
-
-		//start test
-		$('#start-test').click(function(e) {
-			e.preventDefault();
-				startTest();
-		});
-		/* Getting Questions Ajax */
-		$('#get-next-question').click(function(e) {
-
-			e.preventDefault();
-
-			$('.progress').show();
-			getNextQuestion();
-			
-		});
-		$('#finish-test').click(function(e) {
-			e.preventDefault();
-			testFinished(1);
-		});
-
-		$('.ch-res').click(function(e) {
-			e.preventDefault();
-			$('.ch-res').removeClass('active');
-			testFinished($(this).data('category'));
-			$(this).addClass('active');
-		})
-
 		// show flas messages 
 		if ($('.message').text() != '') {
 
@@ -170,146 +143,6 @@ $(document).ready(function() {
 });
 
 
-
-var question_id, answer_id, results;
-
-function getNextQuestion() {
-
-	window.onbeforeunload = function() {
-				return "You might experience a glitch or two if you refresh. Proceed with caution.";
-			}
-
-	$('.question-container').fadeOut(500, function() {
-		
-		$('#get-next-question').attr('disabled', true);
-		$('#get-prev-question').attr('disabled', true);
-
-
-console.log(question_id + ' ------ ' + answer_id);
-
-		$.ajax({
-			type: 'GET',
-			data: {'question_id': question_id,
-							'answer_id': answer_id},
-			url: $('#get-next-question').data('action'),
-			success: function(data) {
-
-				if (data['status']) {
-
-					if (data['status'] == 2) {
-
-						results = data['results'];
-
-						testFinished(1);
-
-						console.log(data['results']);
-
-						return false;
-					}
-
-					// update question count
-					$('#questions-count').text(data['count']);
-					// update question body
-					$('#test-question-body').text(data['question_body']).data('question_id', data['question_id']);
-					// remove all answers
-					$('.answers-container').find('li').remove();
-					// randomize answers
-					data['answers'].randomize();
-					// update answers
-					$(data['answers']).each(function(i) {
-						$('.answers-container').find('ul')
-							.append('<li class="collection-item" data-answer_id="' 
-								+ data['answers'][i]['id'] 
-								+ '">' 
-								+ data['answers'][i]['body'] 
-								+ '</li>');
-					});
-					// set on click action
-					$('#answers-list').find('li').click(function(e)  {
-						$(this).siblings().removeClass('active');
-						$(this).addClass('active');
-						$('#get-next-question').attr('disabled', false);
-						question_id = $('#test-question-body').data('question_id');
-						answer_id = $(this).data('answer_id');
-					});
-					// show question container
-					showStaggeredList('#answers-list');
-					$('.question-container').fadeIn(100, function() {
-						$('.progress').hide();
-					});
-
-				} else {
-
-					console.log('status: 0');
-				}
-			}
-		});
-		
-	})
-
-	return false;
-}
-
-function testFinished(_category_id) {
-
-	window.onbeforeunload = null;
-
-	console.log(results.length);
-
-	
-	
-}
-
-function checkIfStarted() {
-
-	console.log('hi');
-
-	if (Equality.test_started == 1) {
-
-			// $('#before-start').fadeOut(500, function() {
-
-			// 	$('#after-start').slideDown(500);
-				
-			// });
-
-			getNextQuestion();
-		} 
-	// else {
-
-	// 	$('#before-start').show();
-	// }
-
-	return false;
-}
-
-function startTest() {
-
-	
-			
-
-			$('#before-start').fadeOut(500, function() {
-
-				$('#after-start').slideDown(500);
-				
-			});
-
-			$('.progress').show();
-
-			$.ajax({
-				type: 'POST',
-				url: $(this).data('action'),
-				success: function (data) {
-					if (data['status']) {
-
-						getNextQuestion();
-
-
-						console.log('test started');
-					
-					}
-				}
-			});
-}
 
 Array.prototype.randomize = function (){
 		this.sort(

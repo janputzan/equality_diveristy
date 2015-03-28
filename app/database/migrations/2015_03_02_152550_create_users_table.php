@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration {
 		    $table->integer('manager_id')->unsigned()->nullable();
 		    $table->string('invitation_code')->nullable();
 		    $table->boolean('active')->default(false);
+		    $table->boolean('flagged')->default(false);
 
 		    $table->rememberToken();
 		    $table->timestamps();
@@ -30,6 +31,7 @@ class CreateUsersTable extends Migration {
 		    $table->index('manager_id');
 		    $table->index('invitation_code');
 		    $table->index('active');
+		    $table->index('flagged');
 		});
 	}
 

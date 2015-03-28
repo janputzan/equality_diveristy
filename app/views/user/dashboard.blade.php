@@ -15,7 +15,7 @@
 
 	<div class="divider"></div>
 
-	<p class="attempts small-text right"> {{ ( 3 - $currentUser->tests->count()) }} attempts left</p>
+	<p class="attempts small-text right"> {{ (( 3 - $currentUser->tests->count()) > 0 ) ? : 0 }} attempts left</p>
 
 	<div class="valign-wrapper">
 

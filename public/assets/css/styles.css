@@ -247,3 +247,17 @@ th {
 #answers-list > li:hover, #answers-list > li.active {
     background-color: rgba(225,245,196,0.5);
 }
+
+.answers-container #preloader-spin {
+    position: absolute;
+    z-index: 9999;
+    top: 120px;
+    left: 250px;
+    display: none;
+}
+
+#category-name {
+    position: absolute;
+    left: 27px;
+    top: 32px;
+}

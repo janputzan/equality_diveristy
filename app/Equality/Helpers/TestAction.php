@@ -24,21 +24,16 @@ class TestAction {
 
 			foreach (MainArea::all() as $mainArea) {
 
-				// $availableQuestions = Question::where('main_area_id', '=', $mainArea->id)
-				// 						->where('characteristic_id', '=', $characteristic->id)
-				// 						->whereNotIn('id',TestAction::getQuestionsTaken($user))
-				// 						->get();
-
 				$availableQuestions = TestAction::getQuestionsAvailable($user)
 										->where('characteristic_id', '=', $characteristic->id)
 										->where('main_area_id', $mainArea->id);
 
-				// $_len = $availableQuestions->count() - 1;
-
-				// $count = rand(0,$_len);
-				
 				array_push($testQuestions, $availableQuestions->get()->random(1));
 			}
+		}
+		if (count($testQuestions) == 0) {
+
+			return false;
 		}
 
 		$test = new Test;
@@ -51,15 +46,13 @@ class TestAction {
 		foreach ($testQuestions as $key => $value) {
 			
 			array_push($ids, $value->id);
-			
 		}
-
-
-		// dd($ids);
 
 		$test->questions()->sync($ids);
 
-		return $testQuestions; 
+		$response = array('test' => $test, 'question' => $testQuestions[0]);
+
+		return $response; 
 	}
 
 	static public function getQuestionsTaken($user) {
@@ -81,27 +74,62 @@ class TestAction {
 
 	}
 
-	static public function processQuestion($question_id, $answer_id) {
+	static public function processQuestion($test, $question_id, $answer_id) {
 
+		$result = Answer::find($answer_id)->isRight();
 
-		$test = Test::find(Session::get('user.test.id'));
-		$question = Question::find($question_id);
-		$answer = Answer::find($answer_id);
+		$test->questions()->updateExistingPivot($question_id, array('answer_id' => $answer_id, 'result' => $result));
 
-		// dd(array('test' => $test, 'question' => $question, 'answer' => $answer));
-		if ($test && $question && $answer) {
+		return false;
 
-			$result = $answer->is_right;
+	}
 
-			$test->questions()->attach($question->id, array('answer_id' => $answer->id, 'result' => $result));
+	static public function isFinished($test) {
 
-			Session::push('user.test.results', array(
-				'category_id' 	=> $question->characteristic->id,
-				'question' 	=> $question->body,
-				'answer' 	=> $question->rightAnswer()->body,
-				'result' 	=> $result));
+		foreach ($test->questions as $questions) {
+			
+			if ($questions->pivot->answer_id == null) {
 
-			return true;
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	static public function getUnfinished($user) {
+
+		foreach ($user->tests as $test) {
+
+			if (TestAction::countLeftQuestions($test)) {
+
+				return $test;
+			}
+		}
+
+		return false;
+	}
+
+	static public function getFirstQuestion($test) {
+
+		return $test->questions()->wherePivot('answer_id', '=', null)->first();
+	}
+
+	static public function countLeftQuestions($test) {
+
+		if ($test) {
+
+			return $test->questions()->wherePivot('answer_id', '=', null)->count();
+		}
+
+		return false;
+	}
+
+	static public function getResult($test) {
+
+		if ($test) {
+
+			return $test->questions()->wherePivot('result', '=', true)->count();
 		}
 
 		return false;
