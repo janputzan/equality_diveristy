@@ -68,10 +68,18 @@
 								{{ Helpers\TestAction::attemptsCount($user) }}
 							</td>
 							<td>
-								{{ round((Helpers\Result::getBestScore($user)/27)*100)}}%
+								@if (Helpers\Result::getBestScore($user))
+									{{ round((Helpers\Result::getBestScore($user)/27)*100)}}%
+								@else
+									N/A
+								@endif
 							</td>
 							<td>
-								{{ round((Helpers\Result::getAverageScore($user)/27)*100)}}%
+								@if (Helpers\Result::getAverageScore($user))
+									{{ round((Helpers\Result::getAverageScore($user)/27)*100)}}%
+								@else
+									N/A
+								@endif
 							</td>
 							<td>
 								@if (Helpers\Result::hasPassed($user))

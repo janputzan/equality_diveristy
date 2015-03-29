@@ -16,8 +16,15 @@ class Result {
 			}
 		}
 
-		$count > 0 ? $count : 0;
-		return $count;
+		if ($count && $total) {
+
+			$result = $total/$count;
+		} else {
+
+			$result = 0;
+		}
+
+		return $result;
 	}
 
 	static public function getBestScore($user) {
