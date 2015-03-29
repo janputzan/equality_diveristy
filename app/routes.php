@@ -53,6 +53,13 @@ Route::group(array('before' => 'auth'), function() {
 			
 			Route::post('add', array('as' => 'manager.users.store', 'uses' => 'ManagerController@storeUsers'));
 		});
+
+		Route::group(array('prefix' => 'results'), function() {
+
+			Route::get('/', array('as' => 'manager.results.show', 'uses' => 'ResultsController@managerShow'));
+
+			Route::get('/get', array('as' => 'manager.results.get', 'uses' => 'ResultsController@managerGet'));
+		});
 	});
 
 	Route::group(array('prefix' => 'admin', 'before' => 'admin'), function() {
@@ -87,6 +94,13 @@ Route::group(array('before' => 'auth'), function() {
 
 			Route::post('/add/answers', array('as' => 'admin.answers.store', 'uses' => 'AdminController@storeAnswers'));
 
+		});
+
+		Route::group(array('prefix' => 'results'), function() {
+
+			Route::get('/', array('as' => 'admin.results.show', 'uses' => 'ResultsController@adminShow'));
+
+			Route::get('/get', array('as' => 'admin.results.get', 'uses' => 'ResultsController@adminGet'));
 		});
 		
 	});

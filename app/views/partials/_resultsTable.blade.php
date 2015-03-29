@@ -1,4 +1,4 @@
-<table class="striped">
+<table class="striped results-table">
     <thead>
         <tr>
             <th data-field="date">Date Taken</th>
@@ -23,15 +23,25 @@
                </td>
                 <td>{{ round((Helpers\TestAction::getResult($test) / 27)*100) }}%</td>
                 <td>
-                    @if (Helpers\TestAction::getResult($test) >= 21)
 
-                        <span class="pass"><i class="small mdi-action-thumb-up"></i></span>
+                    @if(Helpers\TestAction::isFinished($test))
 
-                    @else 
+                        @if (Helpers\TestAction::getResult($test) >= 21)
 
-                        <span class="fail"><i class="small mdi-action-thumb-down"></i></span>
+                            <span class="pass"><i class="small mdi-action-thumb-up"></i></span>
+
+                        @else 
+
+                            <span class="fail"><i class="small mdi-action-thumb-down"></i></span>
+
+                        @endif
+
+                    @else
+
+                        <span>N/A</span>
 
                     @endif
+
                 </td>
             </tr>
                 
