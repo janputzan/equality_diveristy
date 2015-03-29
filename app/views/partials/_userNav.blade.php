@@ -1,7 +1,7 @@
 <nav class="user">
 	<div class="nav-wrapper">
 		<div class="container">
-			<a href="#!" class="brand-logo">User Panel</a>
+			<a href="{{URL::route('user.dashboard')}}" class="brand-logo">User Panel</a>
 			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			<ul class="right hide-on-med-and-down">
 				<li><a href="#">Results</a></li>

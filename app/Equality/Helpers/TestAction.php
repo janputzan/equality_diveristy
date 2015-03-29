@@ -135,4 +135,32 @@ class TestAction {
 		return false;
 	}
 
+	public static function attemptsCount($user) {
+
+		$count = 0;
+
+		foreach ($user->tests as $test) {
+
+			if (TestAction::isFinished($test)) {
+
+				$count++;
+			}
+		}
+
+		return $count;
+	}
+
+	public static function hasUnfinished($user) {
+
+		foreach ($user->tests as $test) {
+			
+			if (!TestAction::isFinished($test)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }

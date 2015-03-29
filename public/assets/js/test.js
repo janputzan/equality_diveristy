@@ -59,10 +59,6 @@ function getNextQuestion(trigger) {
 					out_duration: 200 // Transition out duration
 				});
 
-				window.onbeforeunload = function() {
-					return "!!!WARNING!!! Reloading this page will start a new test. Proceed with only if that is your wish!!!";
-				}
-
 			} else {
 
 				var answers = data['answers'];
@@ -76,6 +72,7 @@ function getNextQuestion(trigger) {
 					$(this).text(answers[i]['answer_body']).data('answer', answers[i]['answer_id']);
 				});
 				$('#preloader-spin').hide();
+				$('#answers-list').find('li').removeClass('active');
 				showStaggeredList('#answers-list');
 				$('.progress').hide();
 			}
