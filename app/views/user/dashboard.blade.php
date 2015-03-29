@@ -30,14 +30,16 @@
 
 	<p class="attempts small-text right"> {{ 3 - Helpers\TestAction::attemptsCount($currentUser) }} attempts left</p>
 
-	<div class="valign-wrapper">
+	@if ($currentUser->tests->count() == 0)
 
-		@if ($currentUser->tests->count() == 0)
+		<p class="">No results to show. Please take a test by clicking the Take Test button</p>
 
-			<p class="valign">No results to show. Please take a test by clicking the Take Test button</p>
+	@else 
 
-		@endif
+		<p class="">Your test results</p>
 
-	</div>
+		@include('partials._resultsTable')
+
+	@endif
 
 @stop

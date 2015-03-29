@@ -261,3 +261,10 @@ th {
     left: 27px;
     top: 32px;
 }
+
+.pass {
+    color: green;
+}
+.fail {
+    color: red;
+}
