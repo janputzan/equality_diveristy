@@ -15,12 +15,12 @@ class CreateQuestionsTable extends Migration {
 		Schema::create('questions', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('right_answer_id')->unsigned();
-			$table->integer('category_id')->unsigned();
+			$table->integer('characteristic_id')->unsigned();
+			$table->integer('main_area_id')->unsigned();
 			$table->text('body');
 
-			$table->index('right_answer_id');
-			$table->index('category_id');
+			$table->index('characteristic_id');
+			$table->index('main_area_id');
 		});
 	}
 

@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$this->call('AdminSeeder');
+		$this->call('CharacteristicsSeeder');
+		$this->call('MainAreasSeeder');
+		$this->call('QuestionsAndAnswersSeeder');
 	}
 
 }

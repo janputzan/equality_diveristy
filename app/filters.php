@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::route('home');
 		}
 	}
 });
@@ -52,6 +52,35 @@ Route::filter('auth', function()
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
+});
+
+Route::filter('admin', function() {
+
+	if (!Auth::user()->isAdmin()) {
+
+		if (Request::ajax()) {
+
+			return Response::make('Unauthorized', 401);
+
+		} else {
+
+			return Redirect::route('home');
+		}
+	}
+});
+Route::filter('manager', function() {
+
+	if (!Auth::user()->isManager()) {
+
+		if (Request::ajax()) {
+
+			return Response::make('Unauthorized', 401);
+
+		} else {
+
+			return Redirect::route('home');
+		}
+	}
 });
 
 /*
@@ -67,7 +96,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::check()) return Redirect::route('home');
 });
 
 /*

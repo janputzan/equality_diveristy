@@ -38,4 +38,59 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    return 'remember_token';
 	}
 
+	public function tests() {
+
+		return $this->hasMany('Test');
+	}
+
+	public function department() {
+
+		return Department::where('manager_id', '=', $this->manager_id)->first();
+	}
+
+	public function manager() {
+
+		return User::find($this->manager_id);
+	}
+
+	public function manages() {
+
+		return Department::where('manager_id', '=', $this->id)->first();
+	}
+
+	public function getStaff() {
+
+		return User::where('manager_id', '=', $this->id);
+	}
+
+	public function isAdmin() {
+
+		if (!$this->manager_id) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public function isManager() {
+
+		if (User::find($this->manager_id)->isAdmin()) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public function isActive() {
+
+		if ($this->active) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 }

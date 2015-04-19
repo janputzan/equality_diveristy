@@ -1,0 +1,284 @@
+body {
+    min-height: 900px;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.errors {
+    color: blue;
+    font-size: small;
+    font-style: italic;
+    opacity: 0.5;
+    position: absolute;
+    top: 35px;
+}
+
+.progress {
+	display: none;
+	position: absolute;
+	box-sizing: inherit;
+}
+#right_answer_message {
+	top: 10px;
+	left: 190px;
+	color: red;
+}
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, ul.side-nav {
+    box-shadow: none;
+}
+/* Default nav colour */
+nav {
+    height: 100px;
+    color: #fff;
+    background-color: #3384BB;
+}
+/* Different colours for different users */
+nav.admin {
+    background-color: #1693A5;
+}
+nav.user {
+    background-color: #C44D58; /* this one is called Grandma's Pillow */
+}
+nav.manager {
+    background-color: #556270;
+}
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+    line-height: 90px;
+}
+nav ul a {
+        padding: 0 10px;
+}
+span h5 {
+    color: #fff;
+    font-size: 61px;
+    margin: 20px 0 0 10px;
+    text-align: center;
+    text-shadow: 1px 1px #333;
+}
+.container {
+    background-color: #fff;
+   
+}
+.row {
+    margin-top: 20px;
+}
+h5{
+    padding: 5px 0 10px 5px;
+}
+.helper {
+    background-color: #3384BB;
+}
+.main_helper {
+    padding: 20px;
+    width: 660px;
+}
+.mdi-action-done.right {
+    color: green;
+    font-size: 39px;
+}
+.footer_bg{
+    height: 318px;
+    width: 100%;
+    background: url("../../../assets/images/footer_bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background-repeat:no-repeat;
+}
+.main-height {
+    min-height: 300px;
+    position: relative;
+}
+.ajaxForm {
+    margin: 40px 0 0;
+}
+.btn{
+    background-color:#3384BB;
+}
+.btn:hover, .btn-large:hover {
+    background-color: #19679d;
+}
+
+/* Questions Index */
+
+.collection {
+    background-color: #fff;
+}
+
+.question .collapsible-header{
+    line-height: 1.5rem;
+}
+
+.question .collapsible-header:hover {
+
+    background-color: #3384BB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.question.active .collapsible-header {
+
+    background-color: #3384BB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.answer:hover {
+    background-color: #FFD8CC;
+}
+
+.characteristic:hover {
+    background-color: #eee;
+}
+.characteristic.active {
+    background-color: #eee !important;
+}
+
+.question {
+    height: auto;
+    padding: 1px 6px !important;
+}
+.question:hover {
+    background-color: #3384BB;
+}
+
+.question-body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0px;
+}
+
+.collapsible {
+    overflow: hidden;
+}
+
+.collapsible-body {
+    border-bottom: none;
+}
+
+.collection .collection-item.active {
+    background-color: #3384BB;
+    color: #000;
+}
+
+.collapsible-header {
+    height: auto;
+    border-bottom: none;
+}
+
+.answers {
+    margin-bottom: 5px !important;
+}
+
+/* context-menu stuff */
+
+.actions {
+    display: none;
+    position: absolute;
+    right: -35px;
+    color: #039be5;
+    font-size: small;
+
+}
+.actions > li {
+
+    padding: 5px;
+    padding-left: 5px;
+    width: 55px;
+    border: solid 1px #ddd;
+}
+
+.actions > li:hover {
+
+    background-color: #eee;
+}
+th {
+    color: #3384bb;
+    font-size: 16px;
+    margin: 0;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+/* Helper methods */
+.small-text {
+    font-size: small;
+}
+
+/* Attempts counter */
+.attempts {
+    position: relative;
+    top: 25px;
+    right: -175px;
+}
+
+/* Test */
+#test-finished {
+    display: none;
+}
+
+.start-test-container {
+    /*width: 300px;*/
+    margin: auto;
+    position: relative;
+}
+#start-test, #go-back {
+    width: 300px; 
+    top: 60px;
+}
+
+#answers-list > li {
+    opacity: 0;
+}
+
+.message {
+    display: none;
+}
+
+.question-container {
+    position: relative;
+    top: 10px;
+    max-width: 600px;
+    min-width: 400px;
+    margin: auto;
+}
+#test-question-body {
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: large;
+}
+#answers-list > li:hover, #answers-list > li.active {
+    background-color: rgba(225,245,196,0.5);
+}
+
+.answers-container #preloader-spin {
+    position: absolute;
+    z-index: 9999;
+    top: 120px;
+    left: 250px;
+    display: none;
+}
+
+#category-name {
+    position: absolute;
+    left: 27px;
+    top: 32px;
+}
+
+.pass {
+    color: green;
+}
+.fail {
+    color: red;
+}
+
+.results-table {
+    margin-top: 50px;
+}
+
+.department {
+    font-size: small;
+}
+
+.graph-container > .col > span {
+    position: relative;
+    top: -5px;
+    left: 15px;
+}

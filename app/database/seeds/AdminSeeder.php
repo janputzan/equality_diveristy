@@ -14,7 +14,8 @@ class AdminSeeder extends Seeder {
         User::create(array('email' => 'admin@equality.com',
         					'password' => Hash::make('password'),
         					'first_name' => 'Jan',
-        					'last_name' => 'Putzan'));
+        					'last_name' => 'Putzan',
+                            'active' => true));
     }
 
 }

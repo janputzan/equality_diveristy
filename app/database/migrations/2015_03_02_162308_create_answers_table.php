@@ -17,8 +17,10 @@ class CreateAnswersTable extends Migration {
 			$table->increments('id');
 			$table->integer('question_id');
 			$table->text('body');
+			$table->boolean('is_right');
 
 			$table->index('question_id');
+			$table->index('is_right');
 		});
 	}
 
